@@ -1,0 +1,44 @@
+group 'com.cedaniel200.practice'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = 1.8
+
+jacoco {
+    toolVersion = "0.7.6.201602180812"
+    reportsDir = file("$buildDir/jacoco/")
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "https://repo.spring.io/milestone" }
+    maven {
+        url 'https://repo.spring.io/libs-snapshot'
+    }
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url 'https://repo.spring.io/libs-snapshot' }
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.1.RELEASE'
+    }
+}
+
+dependencies {
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.shell:spring-shell-starter:2.0.1.BUILD-SNAPSHOT'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+}
