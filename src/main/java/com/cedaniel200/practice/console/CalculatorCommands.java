@@ -16,8 +16,18 @@ public class CalculatorCommands {
     }
 
     @ShellMethod(value = "Add two whole numbers")
-    public String add(int numberA, int numberB){
-        return String.format(RESULT_FORMAT, "sum", calculator.add(numberA, numberB));
+    public String add(int firstNumber, int secondNumber){
+        return String.format(RESULT_FORMAT, "sum", calculator.add(firstNumber, secondNumber));
+    }
+
+    @ShellMethod(value = "subtract two whole numbers")
+    public String subtract(int firstNumber, int secondNumber){
+        return String.format(RESULT_FORMAT, "subtract", calculator.subtract(firstNumber, secondNumber));
+    }
+
+    @ShellMethod(value = "multiply two whole numbers")
+    public String multiply(int firstNumber, int secondNumber){
+        return String.format(RESULT_FORMAT, "multiply", calculator.multiply(firstNumber, secondNumber));
     }
 
     @ShellMethod(value = "Divide")
