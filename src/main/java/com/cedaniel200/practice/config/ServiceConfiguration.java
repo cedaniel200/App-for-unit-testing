@@ -11,7 +11,7 @@ public class ServiceConfiguration {
     @Bean
     public Retrofit providesRetrofitInstance() {
         return new Retrofit.Builder()
-                .baseUrl("https://www.reqres.in")
+                .baseUrl("https://reqres.in")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
