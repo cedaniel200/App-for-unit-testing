@@ -13,6 +13,19 @@ jacoco {
     reportsDir = file("$buildDir/jacoco/")
 }
 
+jacocoTestReport {
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'com/cedaniel200/practice/config/**',
+                    'com/cedaniel200/practice/console/**',
+                    'com/cedaniel200/practice/model/**',
+                    'com/cedaniel200/practice/App*'
+            ])
+        })
+    }
+}
+
 repositories {
     mavenCentral()
     jcenter()

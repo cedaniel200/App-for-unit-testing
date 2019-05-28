@@ -40,6 +40,7 @@ public class UserDomainDefaultTest {
 
         List<User> actualUsers = userDomain.list();
 
+        Mockito.verify(userRepository).list();
         Assert.assertEquals(2, actualUsers.size());
     }
 
