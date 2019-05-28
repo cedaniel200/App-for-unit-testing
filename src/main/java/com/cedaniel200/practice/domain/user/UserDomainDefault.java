@@ -37,12 +37,6 @@ public class UserDomainDefault implements UserDomain {
         return user;
     }
 
-    private void validateUser(User user) throws MalformedDataException {
-        if(user == null){
-            throw new MalformedDataException("the user has malformed data");
-        }
-    }
-
     private void validateId(int id) throws MalformedDataException {
         if(id < 0){
             throw new MalformedDataException("The parameter is malformed: The id can´t be less than zero");
@@ -50,6 +44,12 @@ public class UserDomainDefault implements UserDomain {
             throw new MalformedDataException("The parameter is malformed: The id should greater than zero");
         }else if(id > 12){
             throw new MalformedDataException("The parameter is malformed: There is no id greater than twelve");
+        }
+    }
+
+    private void validateUser(User user) throws MalformedDataException {
+        if(user == null){
+            throw new MalformedDataException("the user has malformed data");
         }
     }
 }

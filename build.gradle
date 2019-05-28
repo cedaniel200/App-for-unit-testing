@@ -35,7 +35,7 @@ buildscript {
 }
 
 dependencies {
-    testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.27.0'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.23.0'
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 
     implementation 'org.springframework.boot:spring-boot-starter'
