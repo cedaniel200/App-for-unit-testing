@@ -12,6 +12,8 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 
 import javax.mail.internet.MimeMessage;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmailHandlerDefaultTest {
 
@@ -42,6 +44,12 @@ public class EmailHandlerDefaultTest {
 }
 
 class JavaMailSenderStub implements JavaMailSender {
+
+    List<SimpleMailMessage> emails;
+
+    JavaMailSenderStub() {
+        emails = new ArrayList<>();
+    }
 
     @Override
     public MimeMessage createMimeMessage() {
@@ -75,7 +83,7 @@ class JavaMailSenderStub implements JavaMailSender {
 
     @Override
     public void send(SimpleMailMessage simpleMessage) throws MailException {
-        // No es necesario hacer nada, no se quiere enviar el email
+        emails.add(simpleMessage);
     }
 
     @Override
