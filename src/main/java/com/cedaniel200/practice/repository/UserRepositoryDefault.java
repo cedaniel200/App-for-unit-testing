@@ -9,7 +9,6 @@ import retrofit2.Retrofit;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Optional;
 
 public class UserRepositoryDefault implements UserRepository {
 
