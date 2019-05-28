@@ -19,13 +19,16 @@ public class EmailDomainDefaultTest {
     @Test
     public void mustIsSuccessfulIfEmailIsSend(){
         Email email = new EmailDummy();
+
         emailDomain.sendMail(email);
+
         Assert.assertEquals(1, emailHandleStub.getAmountOfEmailsSent());
         Assert.assertEquals(0, emailHandleStub.getAmountOfEmailsNotSend());
     }
     @Test
     public void mustIsSuccessfulIfEmailIsNotSend(){
         emailDomain.sendMail(null);
+
         Assert.assertEquals(0, emailHandleStub.getAmountOfEmailsSent());
         Assert.assertEquals(1, emailHandleStub.getAmountOfEmailsNotSend());
     }

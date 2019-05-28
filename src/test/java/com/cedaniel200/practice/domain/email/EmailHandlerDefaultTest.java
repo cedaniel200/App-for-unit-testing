@@ -27,7 +27,9 @@ public class EmailHandlerDefaultTest {
     @Test
     public void  mustIsSuccessfulIfEmailIsSend(){
         Email email = new EmailData("email@email.com", "hi", "Hello");
+
         emailHandler.send(email);
+
         Assert.assertEquals(1, emailHandler.getAmountOfEmailsSent());
         Assert.assertTrue(((JavaMailSenderStub)javaMailSender).isCalled());
     }
@@ -35,6 +37,7 @@ public class EmailHandlerDefaultTest {
     @Test
     public void  mustIsSuccessfulIfEmailIsNotSend(){
         emailHandler.send(null);
+
         Assert.assertEquals(1, emailHandler.getAmountOfEmailsNotSend());
         Assert.assertFalse(((JavaMailSenderStub)javaMailSender).isCalled());
     }
