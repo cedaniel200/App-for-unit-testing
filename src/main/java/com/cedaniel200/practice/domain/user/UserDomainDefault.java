@@ -20,7 +20,7 @@ public class UserDomainDefault implements UserDomain {
     public List<User> list() throws ServiceNotAvailableException, MalformedDataException {
         UsersSummary userSummary = repository.list();
         validateUserSummary(userSummary);
-        return repository.list().getData();
+        return userSummary.getData();
     }
 
     private void validateUserSummary(UsersSummary usersSummary) throws MalformedDataException {
