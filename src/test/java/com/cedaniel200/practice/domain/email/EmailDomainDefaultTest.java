@@ -8,16 +8,16 @@ import org.junit.Test;
 public class EmailDomainDefaultTest {
 
     private EmailDomain emailDomain;
-    private EmailHandleStub emailHandleStub;
+    private EmailHandleStubSpy emailHandleStub;
 
     @Before
     public void setup(){
-        emailHandleStub = new EmailHandleStub();
+        emailHandleStub = new EmailHandleStubSpy();
         emailDomain = new EmailDomainDefault(emailHandleStub);
     }
 
     @Test
-    public void mustIsSuccessfulIfEmailIsSend(){
+    public void mustBeSuccessfulIfEmailIsSend(){
         Email email = new EmailDummy();
 
         emailDomain.sendMail(email);
@@ -26,7 +26,7 @@ public class EmailDomainDefaultTest {
         Assert.assertEquals(0, emailHandleStub.getAmountOfEmailsNotSend());
     }
     @Test
-    public void mustIsSuccessfulIfEmailIsNotSend(){
+    public void mustBeSuccessfulIfEmailIsNotSend(){
         emailDomain.sendMail(null);
 
         Assert.assertEquals(0, emailHandleStub.getAmountOfEmailsSent());
@@ -35,7 +35,7 @@ public class EmailDomainDefaultTest {
 
 }
 
-class EmailHandleStub implements EmailHandler {
+class EmailHandleStubSpy implements EmailHandler {
 
     private int emailsSend = 0;
     private int emailsNotSend = 0;

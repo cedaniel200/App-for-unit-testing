@@ -35,7 +35,7 @@ public class UserDomainDefaultTest {
     }
 
     @Test
-    public void mustIsSuccessfulIfReturnUserList() throws ServiceNotAvailableException, MalformedDataException {
+    public void mustBeSuccessfulIfReturnUserList() throws ServiceNotAvailableException, MalformedDataException {
         UsersSummary userSummary = new UsersSummary();
         List<User> expectedUsers = new ArrayList<>();
         expectedUsers.add(new User());
@@ -51,7 +51,7 @@ public class UserDomainDefaultTest {
 
     // Segunda forma de validar si se lanza una excepción
     @Test(expected = MalformedDataException.class)
-    public void mustIsSuccessfulIfListMethodThrowAnMalformedDataException() throws ServiceNotAvailableException, MalformedDataException {
+    public void mustBeSuccessfulIfListMethodThrowAnMalformedDataException() throws ServiceNotAvailableException, MalformedDataException {
         Mockito.when(userRepository.list()).thenReturn(null);
 
         userDomain.list();
@@ -59,14 +59,14 @@ public class UserDomainDefaultTest {
 
     // Segunda forma de validar si se lanza una excepción
     @Test(expected = ServiceNotAvailableException.class)
-    public void mustIsSuccessfulIfListMethodThrowAnServiceNotAvailableException() throws ServiceNotAvailableException, MalformedDataException {
+    public void mustBeSuccessfulIfListMethodThrowAnServiceNotAvailableException() throws ServiceNotAvailableException, MalformedDataException {
         Mockito.when(userRepository.list()).thenThrow(new ServiceNotAvailableException("", null));
 
         userDomain.list();
     }
 
     @Test
-    public void mustIsSuccessfulIfFindByIdMethodReturnAnUser() throws MalformedDataException, ServiceNotAvailableException {
+    public void mustBeSuccessfulIfFindByIdMethodReturnAnUser() throws MalformedDataException, ServiceNotAvailableException {
         int id = 1;
         User expectedUser = new User();
         expectedUser.setId(id);
@@ -78,7 +78,7 @@ public class UserDomainDefaultTest {
     }
 
     @Test(expected = ServiceNotAvailableException.class)
-    public void mustIsSuccessfulIfFindByIdMethodThrowAnServiceNotAvailableException() throws ServiceNotAvailableException, MalformedDataException {
+    public void mustBeSuccessfulIfFindByIdMethodThrowAnServiceNotAvailableException() throws ServiceNotAvailableException, MalformedDataException {
         Mockito.when(userRepository.findById(anyInt())).thenThrow(new ServiceNotAvailableException("", null));
 
         userDomain.findById(1);
@@ -86,7 +86,7 @@ public class UserDomainDefaultTest {
 
     // Tercera forma para validar si se lanza una excepción
     @Test
-    public void mustIsSuccessfulIfFindByIdMethodThrowAnMalformedDataExceptionWhenUserIsNull() throws ServiceNotAvailableException, MalformedDataException {
+    public void mustBeSuccessfulIfFindByIdMethodThrowAnMalformedDataExceptionWhenUserIsNull() throws ServiceNotAvailableException, MalformedDataException {
         Mockito.when(userRepository.findById(anyInt())).thenReturn(null);
         expectedException.expect(MalformedDataException.class);
         expectedException.expectMessage("the user has malformed data");
@@ -95,7 +95,7 @@ public class UserDomainDefaultTest {
     }
 
     @Test
-    public void mustIsSuccessfulIfFindByIdMethodThrowAnMalformedDataExceptionWhenIdIsNegative() throws MalformedDataException, ServiceNotAvailableException {
+    public void mustBeSuccessfulIfFindByIdMethodThrowAnMalformedDataExceptionWhenIdIsNegative() throws MalformedDataException, ServiceNotAvailableException {
         expectedException.expect(MalformedDataException.class);
         expectedException.expectMessage("The parameter is malformed: The id can´t be less than zero");
 
@@ -103,7 +103,7 @@ public class UserDomainDefaultTest {
     }
 
     @Test
-    public void mustIsSuccessfulIfFindByIdMethodThrowAnMalformedDataExceptionWhenIdIsZero() throws MalformedDataException, ServiceNotAvailableException {
+    public void mustBeSuccessfulIfFindByIdMethodThrowAnMalformedDataExceptionWhenIdIsZero() throws MalformedDataException, ServiceNotAvailableException {
         expectedException.expect(MalformedDataException.class);
         expectedException.expectMessage("The parameter is malformed: The id should greater than zero");
 
@@ -111,7 +111,7 @@ public class UserDomainDefaultTest {
     }
 
     @Test
-    public void mustIsSuccessfulIfFindByIdMethodThrowAnMalformedDataExceptionWhenIdGreaterThanTwelve() throws MalformedDataException, ServiceNotAvailableException {
+    public void mustBeSuccessfulIfFindByIdMethodThrowAnMalformedDataExceptionWhenIdGreaterThanTwelve() throws MalformedDataException, ServiceNotAvailableException {
         expectedException.expect(MalformedDataException.class);
         expectedException.expectMessage("The parameter is malformed: There is no id greater than twelve");
 

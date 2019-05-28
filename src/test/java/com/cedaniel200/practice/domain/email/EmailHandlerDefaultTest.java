@@ -25,27 +25,23 @@ public class EmailHandlerDefaultTest {
     }
 
     @Test
-    public void  mustIsSuccessfulIfEmailIsSend(){
+    public void mustBeSuccessfulIfEmailIsSend(){
         Email email = new EmailData("email@email.com", "hi", "Hello");
 
         emailHandler.send(email);
 
         Assert.assertEquals(1, emailHandler.getAmountOfEmailsSent());
-        Assert.assertTrue(((JavaMailSenderStub)javaMailSender).isCalled());
     }
 
     @Test
-    public void  mustIsSuccessfulIfEmailIsNotSend(){
+    public void mustBeSuccessfulIfEmailIsNotSend(){
         emailHandler.send(null);
 
         Assert.assertEquals(1, emailHandler.getAmountOfEmailsNotSend());
-        Assert.assertFalse(((JavaMailSenderStub)javaMailSender).isCalled());
     }
 }
 
 class JavaMailSenderStub implements JavaMailSender {
-
-    private boolean isCalled;
 
     @Override
     public MimeMessage createMimeMessage() {
@@ -79,7 +75,7 @@ class JavaMailSenderStub implements JavaMailSender {
 
     @Override
     public void send(SimpleMailMessage simpleMessage) throws MailException {
-        isCalled = true;
+        // No es necesario hacer nada, no se quiere enviar el email
     }
 
     @Override
@@ -87,7 +83,4 @@ class JavaMailSenderStub implements JavaMailSender {
 
     }
 
-    public boolean isCalled() {
-        return isCalled;
-    }
 }
