@@ -12,7 +12,7 @@ public class GreetingByLanguage {
                 greeting = "Hello";
                 break;
             case "pt":
-                greeting = "ola";
+                greeting = "Ola";
                 break;
         }
         return greeting;
