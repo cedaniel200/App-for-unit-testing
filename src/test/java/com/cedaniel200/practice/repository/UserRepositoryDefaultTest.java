@@ -7,7 +7,6 @@ import com.cedaniel200.practice.service.UserService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import retrofit2.Call;

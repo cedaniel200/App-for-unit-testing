@@ -50,11 +50,15 @@ buildscript {
 dependencies {
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.19.0'
     testImplementation group: 'org.mockito', name: 'mockito-inline', version: '2.19.0'
+    testImplementation group: 'org.powermock', name: 'powermock-module-junit4', version: '2.0.0'
+    testImplementation group: 'org.powermock', name: 'powermock-api-mockito2', version: '2.0.0'
     testImplementation group: 'junit', name: 'junit', version: '4.12'
+    testImplementation 'pl.pragmatists:JUnitParams:1.1.0'
 
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.shell:spring-shell-starter:2.0.1.BUILD-SNAPSHOT'
     implementation 'org.springframework.boot:spring-boot-starter-mail:2.0.1.RELEASE'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.6'
 }

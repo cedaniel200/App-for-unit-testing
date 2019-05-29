@@ -1,11 +1,15 @@
 package com.cedaniel200.practice.domain.calculator;
 
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.junit.Assert.fail;
 
+@RunWith(JUnitParamsRunner.class)
 public class CalculatorDefaultTest {
 
     private Calculator calculator;
@@ -26,6 +30,19 @@ public class CalculatorDefaultTest {
 
         // Assert
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    @Parameters({"1, 2, 3",
+            "-10, 30, 20",
+            "15, -5, 10",
+            "-5, -10, -15" })
+    public void mustBeSuccessfulIfAddIntegerNumbersWithParam(int firstNumber, int secondNumber, int expectedValue){
+        // Act
+        int actual = calculator.add(firstNumber, secondNumber);
+
+        // Assert
+        Assert.assertEquals(expectedValue, actual);
     }
 
     @Test
