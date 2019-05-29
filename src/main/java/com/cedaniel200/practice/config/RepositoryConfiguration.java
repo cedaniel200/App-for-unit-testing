@@ -1,7 +1,7 @@
 package com.cedaniel200.practice.config;
 
-import com.cedaniel200.practice.repository.UserRepository;
-import com.cedaniel200.practice.repository.UserRepositoryDefault;
+import com.cedaniel200.practice.repository.user.UserRepository;
+import com.cedaniel200.practice.repository.user.UserRepositoryDefault;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import retrofit2.Retrofit;

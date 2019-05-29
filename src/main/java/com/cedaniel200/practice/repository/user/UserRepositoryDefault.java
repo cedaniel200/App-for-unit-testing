@@ -1,4 +1,4 @@
-package com.cedaniel200.practice.repository;
+package com.cedaniel200.practice.repository.user;
 
 import com.cedaniel200.practice.exception.ServiceNotAvailableException;
 import com.cedaniel200.practice.model.User;

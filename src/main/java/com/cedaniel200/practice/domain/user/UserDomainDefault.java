@@ -4,7 +4,7 @@ import com.cedaniel200.practice.exception.MalformedDataException;
 import com.cedaniel200.practice.exception.ServiceNotAvailableException;
 import com.cedaniel200.practice.model.User;
 import com.cedaniel200.practice.model.UsersSummary;
-import com.cedaniel200.practice.repository.UserRepository;
+import com.cedaniel200.practice.repository.user.UserRepository;
 
 import java.util.List;
 
