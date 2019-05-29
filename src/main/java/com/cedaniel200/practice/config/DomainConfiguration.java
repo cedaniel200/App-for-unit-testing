@@ -6,9 +6,11 @@ import com.cedaniel200.practice.domain.email.EmailDomain;
 import com.cedaniel200.practice.domain.email.EmailDomainDefault;
 import com.cedaniel200.practice.domain.email.EmailHandler;
 import com.cedaniel200.practice.domain.email.EmailHandlerDefault;
+import com.cedaniel200.practice.domain.greeting.GreetingDomain;
+import com.cedaniel200.practice.domain.greeting.GreetingDomainDefault;
 import com.cedaniel200.practice.domain.user.UserDomain;
 import com.cedaniel200.practice.domain.user.UserDomainDefault;
-import com.cedaniel200.practice.repository.UserRepository;
+import com.cedaniel200.practice.repository.user.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -55,6 +57,11 @@ public class DomainConfiguration {
     @Bean
     public EmailDomain providesEmailDomainDefaultInstance(EmailHandler emailHandler){
         return new EmailDomainDefault(emailHandler);
+    }
+
+    @Bean
+    public GreetingDomain providesGreetingDomainDefaultInstance(){
+        return new GreetingDomainDefault();
     }
 
 }
