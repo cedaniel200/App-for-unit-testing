@@ -60,5 +60,4 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-mail:2.0.1.RELEASE'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-    implementation group: 'commons-io', name: 'commons-io', version: '2.6'
 }
