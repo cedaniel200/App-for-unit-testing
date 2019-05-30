@@ -56,7 +56,7 @@ dependencies {
     testImplementation 'pl.pragmatists:JUnitParams:1.1.0'
 
     implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.springframework.shell:spring-shell-starter:2.0.1.BUILD-SNAPSHOT'
+    implementation 'org.springframework.shell:spring-shell-starter:2.0.1.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter-mail:2.0.1.RELEASE'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
