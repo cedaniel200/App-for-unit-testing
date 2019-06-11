@@ -1,5 +1,6 @@
 package com.cedaniel200.practice.domain.calculator;
 
+import com.cedaniel200.practice.domain.calculator.operation.*;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Assert;
@@ -12,12 +13,20 @@ import static org.junit.Assert.fail;
 @RunWith(JUnitParamsRunner.class)
 public class CalculatorDefaultTest {
 
+    private Adder adder;
+    private Subtractor subtractor;
+    private Multiplier multiplier;
+    private Divider divider;
     private Calculator calculator;
 
     @Before
     public void setup(){
         // Arrange
-        calculator = new CalculatorDefault();
+        adder = new AdderDefault();
+        subtractor = new SubtractorDefault();
+        multiplier = new MultiplierDefault();
+        divider = new DividerDefault();
+        calculator = new CalculatorDefault(adder, subtractor, multiplier, divider);
     }
 
     @Test
