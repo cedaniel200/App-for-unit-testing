@@ -1,13 +1,10 @@
 package com.cedaniel200.practice.domain.calculator;
 
-public interface Calculator {
+import com.cedaniel200.practice.domain.calculator.operation.Adder;
+import com.cedaniel200.practice.domain.calculator.operation.Divider;
+import com.cedaniel200.practice.domain.calculator.operation.Multiplier;
+import com.cedaniel200.practice.domain.calculator.operation.Subtractor;
 
-    int add(int firstNumber, int secondNumber);
-
-    int subtract(int firstNumber, int secondNumber);
-
-    int multiply(int firstNumber, int secondNumber);
-
-    int divide(int dividend, int divider);
+public abstract class Calculator implements Adder, Subtractor, Multiplier, Divider {
 
 }

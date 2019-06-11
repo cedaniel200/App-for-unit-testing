@@ -2,6 +2,7 @@ package com.cedaniel200.practice.config;
 
 import com.cedaniel200.practice.domain.calculator.Calculator;
 import com.cedaniel200.practice.domain.calculator.CalculatorDefault;
+import com.cedaniel200.practice.domain.calculator.operation.*;
 import com.cedaniel200.practice.domain.email.EmailDomain;
 import com.cedaniel200.practice.domain.email.EmailDomainDefault;
 import com.cedaniel200.practice.domain.email.EmailHandler;
@@ -22,8 +23,28 @@ import java.util.Properties;
 public class DomainConfiguration {
 
     @Bean
-    public Calculator providesCalculatorDefaultInstance(){
-        return new CalculatorDefault();
+    public Adder providesAdderDefaultInstance(){
+        return new AdderDefault();
+    }
+
+    @Bean
+    public Subtractor providesSubtractorDefaultInstance(){
+        return new SubtractorDefault();
+    }
+
+    @Bean
+    public Multiplier providesMultiplierDefaultInstance(){
+        return new MultiplierDefault();
+    }
+
+    @Bean
+    public Divider providesDividerDefaultInstance(){
+        return new DividerDefault();
+    }
+
+    @Bean
+    public Calculator providesCalculatorDefaultInstance(Adder adder, Subtractor subtractor, Multiplier multiplier, Divider divider){
+        return new CalculatorDefault(adder, subtractor, multiplier, divider);
     }
 
     @Bean
