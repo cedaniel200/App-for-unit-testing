@@ -1,4 +1,4 @@
-package com.cedaniel200.practice.repository.greeting;
+package com.cedaniel200.practice.domain.greeting;
 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;

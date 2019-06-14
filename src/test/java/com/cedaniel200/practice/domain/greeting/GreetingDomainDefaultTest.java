@@ -1,6 +1,5 @@
 package com.cedaniel200.practice.domain.greeting;
 
-import com.cedaniel200.practice.repository.greeting.GreetingByLanguage;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -16,7 +15,6 @@ import java.io.File;
 import java.io.IOException;
 
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
