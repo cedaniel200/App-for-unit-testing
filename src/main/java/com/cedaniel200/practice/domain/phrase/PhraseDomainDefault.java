@@ -14,7 +14,7 @@ public class PhraseDomainDefault implements PhraseDomain {
 
     @Override
     public long create(String phrase, String author) {
-        if(author.equals("")){
+        if(author == null || "".equals(author)){
             author = DEFAULT_AUTHOR;
         }
         Phrase phrase1 = new Phrase(phrase, author);

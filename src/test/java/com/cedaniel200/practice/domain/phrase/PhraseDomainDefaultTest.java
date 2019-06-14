@@ -16,21 +16,41 @@ public class PhraseDomainDefaultTest {
     }
 
     @Test
-    public void mustBeSuccessfulWhenCreateMethodReturnAnId(){
+    public void mustBeSuccessfulWhenCreateMethodReturnTheCorrectId(){
         long expected = 0;
 
-        long idActual = phraseDomain.create("a phrase", "anonymous");
+        long idActual = phraseDomain.create("a phrase", "Cesar");
 
         Assert.assertEquals(expected, idActual);
+        Assert.assertEquals("Cesar", phraseDomain.getPhrase(idActual).getAuthor());
     }
 
     @Test
-    public void mustBeSuccessfulWhe(){
-        long id = phraseDomain.create("a phrase", "anonymous");
+    public void mustBeSuccessfulWhenCreateMethodAssignsAnonymousToAnEmptyAuthor(){
+        long expected = 0;
+
+        long idActual = phraseDomain.create("a phrase", "");
+
+        Assert.assertEquals("anonymous", phraseDomain.getPhrase(idActual).getAuthor());
+    }
+
+    @Test
+    public void mustBeSuccessfulWhenCreateMethodAssignsAnonymousToANullAuthor(){
+        long expected = 0;
+
+        long idActual = phraseDomain.create("a phrase", null);
+
+        Assert.assertEquals("anonymous", phraseDomain.getPhrase(idActual).getAuthor());
+    }
+
+    @Test
+    public void mustBeSuccessfulWhenGetPhraseMethodReturnAPhrase(){
+        long id = phraseDomain.create("a phrase", "");
 
         Phrase phrase = phraseDomain.getPhrase(id);
 
         Assert.assertEquals(id, phrase.getId());
         Assert.assertTrue("a phrase".equalsIgnoreCase(phrase.getPhrase()));
     }
+
 }
