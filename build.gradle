@@ -1,3 +1,16 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url 'https://repo.spring.io/libs-snapshot' }
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.1.RELEASE'
+    }
+}
+
+
 group 'com.cedaniel200.practice'
 version '1.0-SNAPSHOT'
 
@@ -20,7 +33,7 @@ jacoco {
 
 jacocoTestReport {
     afterEvaluate {
-        classDirectories = files(classDirectories.files.collect {
+        classDirectories.from = files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
                     'com/cedaniel200/practice/config/**',
                     'com/cedaniel200/practice/console/**',
@@ -37,18 +50,6 @@ repositories {
     maven { url "https://repo.spring.io/milestone" }
     maven {
         url 'https://repo.spring.io/libs-snapshot'
-    }
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-        maven { url "https://repo.spring.io/milestone" }
-        maven { url 'https://repo.spring.io/libs-snapshot' }
-    }
-    dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.1.RELEASE'
     }
 }
 
