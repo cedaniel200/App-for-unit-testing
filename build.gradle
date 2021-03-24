@@ -20,7 +20,7 @@ jacoco {
 
 jacocoTestReport {
     afterEvaluate {
-        classDirectories = files(classDirectories.files.collect {
+        classDirectories.from = files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
                     'com/cedaniel200/practice/config/**',
                     'com/cedaniel200/practice/console/**',
