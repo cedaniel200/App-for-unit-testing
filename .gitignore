@@ -30,8 +30,6 @@ hs_err_pid*
 /.gradle/
 /gradle/
 /build/
-gradlew.bat
-gradlew
 
 # Spring shell
 spring-shell.log
