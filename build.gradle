@@ -14,8 +14,8 @@ bootJar {
 }
 
 jacoco {
-    toolVersion = "0.8.3"
-    reportsDir = file("$buildDir/jacoco/")
+    toolVersion = "0.8.8"
+    reportsDirectory = layout.buildDirectory.dir('jacoco')
 }
 
 jacocoTestReport {
@@ -33,7 +33,6 @@ jacocoTestReport {
 
 repositories {
     mavenCentral()
-    jcenter()
     maven { url "https://repo.spring.io/milestone" }
     maven {
         url 'https://repo.spring.io/libs-snapshot'
@@ -43,7 +42,6 @@ repositories {
 buildscript {
     repositories {
         mavenCentral()
-        jcenter()
         maven { url "https://repo.spring.io/milestone" }
         maven { url 'https://repo.spring.io/libs-snapshot' }
     }
@@ -58,11 +56,11 @@ dependencies {
     testImplementation group: 'org.powermock', name: 'powermock-module-junit4', version: '2.0.0'
     testImplementation group: 'org.powermock', name: 'powermock-api-mockito2', version: '2.0.0'
     testImplementation group: 'junit', name: 'junit', version: '4.12'
-    testImplementation 'pl.pragmatists:JUnitParams:1.1.0'
+    testImplementation 'pl.pragmatists:JUnitParams:1.1.1'
 
-    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter:2.6.7'
     implementation 'org.springframework.shell:spring-shell-starter:2.0.1.RELEASE'
-    implementation 'org.springframework.boot:spring-boot-starter-mail:2.0.1.RELEASE'
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'org.springframework.boot:spring-boot-starter-mail:2.6.7'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 }
