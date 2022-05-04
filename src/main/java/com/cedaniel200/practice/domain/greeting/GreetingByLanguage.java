@@ -2,6 +2,9 @@ package com.cedaniel200.practice.domain.greeting;
 
 public class GreetingByLanguage {
 
+    private GreetingByLanguage() {
+    }
+
     public static String getGreeting(String language){
         String greeting = "unsupported language";
         switch(language.toLowerCase()){
