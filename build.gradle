@@ -1,12 +1,25 @@
-group 'com.cedaniel200.practice'
-version '1.0-SNAPSHOT'
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url 'https://repo.spring.io/libs-snapshot' }
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.1.RELEASE'
+    }
+}
 
-apply plugin: 'java'
-apply plugin: 'jacoco'
+plugins {
+    id "java"
+    id "org.sonarqube" version "3.3"
+    id "jacoco"
+}
+
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-//sourceCompatibility = 1.8
+group 'com.cedaniel200.practice'
+version '1.0-SNAPSHOT'
 
 bootJar {
     baseName('unit-testing-app')
@@ -15,7 +28,6 @@ bootJar {
 
 jacoco {
     toolVersion = "0.8.8"
-    reportsDirectory = layout.buildDirectory.dir('jacoco')
 }
 
 jacocoTestReport {
@@ -34,22 +46,21 @@ jacocoTestReport {
     }
 }
 
+sonarqube {
+    properties {
+        property "sonar.branch.name", gitBranch()
+        property "sonar.branch.targe", gitBranch()
+        property "sonar.projectKey", "taller-pruebas-unitarias"
+        property "sonar.organization", "capacitacion-github"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
+}
+
 repositories {
     mavenCentral()
     maven { url "https://repo.spring.io/milestone" }
     maven {
         url 'https://repo.spring.io/libs-snapshot'
-    }
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-        maven { url "https://repo.spring.io/milestone" }
-        maven { url 'https://repo.spring.io/libs-snapshot' }
-    }
-    dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.1.RELEASE'
     }
 }
 
@@ -65,4 +76,13 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-mail:2.6.7'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+}
+
+def gitBranch() {
+    def branch = ""
+    def proc = "git rev-parse --abbrev-ref HEAD".execute()
+    proc.in.eachLine { line -> branch = line }
+    proc.err.eachLine { line -> println line }
+    proc.waitFor()
+    branch
 }
