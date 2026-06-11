@@ -41,12 +41,14 @@ public class UserDomainDefaultTest {
         assertEquals(2, actualUsers.size());
     }
 
+    // Segunda forma de validar si se lanza una excepción
     @Test
     void mustBeSuccessfulIfListMethodThrowAnMalformedDataException() throws ServiceNotAvailableException {
         Mockito.when(userRepository.list()).thenReturn(null);
         assertThrows(MalformedDataException.class, () -> userDomain.list());
     }
 
+    // Segunda forma de validar si se lanza una excepción
     @Test
     void mustBeSuccessfulIfListMethodThrowAnServiceNotAvailableException() throws ServiceNotAvailableException {
         Mockito.when(userRepository.list()).thenThrow(new ServiceNotAvailableException("", null));
@@ -71,6 +73,7 @@ public class UserDomainDefaultTest {
         assertThrows(ServiceNotAvailableException.class, () -> userDomain.findById(1));
     }
 
+    // Tercera forma para validar si se lanza una excepción
     @Test
     void mustBeSuccessfulIfFindByIdMethodThrowAnMalformedDataExceptionWhenUserIsNull() throws ServiceNotAvailableException {
         Mockito.when(userRepository.findById(anyInt())).thenReturn(null);
