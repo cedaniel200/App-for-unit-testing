@@ -11,7 +11,7 @@ public class EmailDomainDefault implements EmailDomain {
     }
 
     @Override
-    public void sendMail(Email email) {
-        emailHandler.send(email);
+    public boolean sendMail(Email email) {
+        return emailHandler.send(email);
     }
 }

@@ -1,33 +1,57 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven { url "https://repo.spring.io/milestone" }
-        maven { url 'https://repo.spring.io/libs-snapshot' }
-    }
-    dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.1.RELEASE'
-    }
-}
-
 plugins {
     id "java"
-    id "org.sonarqube" version "3.3"
+    id "org.springframework.boot" version "3.5.14"
+    id "io.spring.dependency-management" version "1.1.7"
+    id "org.sonarqube" version "7.3.1.8318"
     id "jacoco"
 }
 
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-
-group 'com.cedaniel200.practice'
-version '1.0-SNAPSHOT'
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
 
 bootJar {
-    baseName('unit-testing-app')
+    archiveBaseName = 'unit-testing-app'
     version('1.0.0')
 }
 
 jacoco {
-    toolVersion = "0.8.8"
+    toolVersion = "0.8.15"
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    failOnNoDiscoveredTests = false
+}
+
+tasks.register('unitTest', Test) {
+    description = 'Ejecuta solo pruebas unitarias (para estudiantes)'
+    group = 'verification'
+    useJUnitPlatform()
+    failOnNoDiscoveredTests = false
+    exclude '**/*E2E*'
+    exclude '**/*Integration*'
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+}
+
+tasks.register('e2eTest', Test) {
+    description = 'Ejecuta pruebas end-to-end de consola (mantenimiento)'
+    group = 'verification'
+    useJUnitPlatform()
+    include '**/*E2E*'
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+}
+
+tasks.register('integrationTest', Test) {
+    description = 'Ejecuta pruebas de integracion con servicios externos (mantenimiento)'
+    group = 'verification'
+    useJUnitPlatform()
+    include '**/*Integration*'
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
 }
 
 jacocoTestReport {
@@ -46,10 +70,33 @@ jacocoTestReport {
     }
 }
 
+tasks.register('jacocoUnitTestReport', JacocoReport) {
+    description = 'Reporte de cobertura solo para pruebas unitarias (estudiantes)'
+    group = 'verification'
+    dependsOn unitTest
+
+    executionData.from = files("${buildDir}/jacoco/unitTest.exec")
+
+    reports {
+        xml.required = true
+        html.required = true
+    }
+
+    sourceDirectories.from = sourceSets.main.allSource.srcDirs
+    classDirectories.from = files(sourceSets.main.output.collect {
+        fileTree(dir: it, exclude: [
+                'com/cedaniel200/practice/config/**',
+                'com/cedaniel200/practice/console/**',
+                'com/cedaniel200/practice/model/**',
+                'com/cedaniel200/practice/App*'
+        ])
+    })
+}
+
 sonarqube {
     properties {
         property "sonar.branch.name", gitBranch()
-        property "sonar.branch.targe", gitBranch()
+        property "sonar.branch.target", gitBranch()
         property "sonar.projectKey", "taller-pruebas-unitarias"
         property "sonar.organization", "capacitacion-github"
         property "sonar.host.url", "https://sonarcloud.io"
@@ -59,21 +106,26 @@ sonarqube {
 repositories {
     mavenCentral()
     maven { url "https://repo.spring.io/milestone" }
-    maven {
-        url 'https://repo.spring.io/libs-snapshot'
+    maven { url 'https://repo.spring.io/libs-snapshot' }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.shell:spring-shell-dependencies:3.4.2"
     }
 }
 
 dependencies {
-    testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.4.0'
-    testImplementation group: 'org.mockito', name: 'mockito-inline', version: '4.5.1'
-    testImplementation group: 'junit', name: 'junit', version: '4.12'
-    testImplementation 'pl.pragmatists:JUnitParams:1.1.1'
-    testImplementation 'net.bytebuddy:byte-buddy:1.12.10'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.14.0'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.mockito'
+    }
+    testImplementation 'org.springframework.shell:spring-shell-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 
-    implementation 'org.springframework.boot:spring-boot-starter:2.6.7'
-    implementation 'org.springframework.shell:spring-shell-starter:2.0.1.RELEASE'
-    implementation 'org.springframework.boot:spring-boot-starter-mail:2.6.7'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.shell:spring-shell-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 }

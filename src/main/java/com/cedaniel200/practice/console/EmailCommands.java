@@ -8,7 +8,8 @@ import org.springframework.shell.standard.ShellMethod;
 @ShellComponent
 public class EmailCommands {
 
-    public static final String DEFAULT_MESSAGE = "We try to send your email, we hope you run with luck";
+    private static final String SUCCESS_MESSAGE = "We tried to send your email, we hope you have luck";
+    private static final String FAILURE_MESSAGE = "Failed to send email. Check the README for more information";
     private EmailDomain emailDomain;
 
     public EmailCommands(EmailDomain emailDomain) {
@@ -17,7 +18,7 @@ public class EmailCommands {
 
     @ShellMethod(value = "Send email")
     public String send(String to, String subject, String message) {
-        emailDomain.sendMail(new EmailData(to, subject, message));
-        return DEFAULT_MESSAGE;
+        boolean sent = emailDomain.sendMail(new EmailData(to, subject, message));
+        return sent ? SUCCESS_MESSAGE : FAILURE_MESSAGE;
     }
 }
