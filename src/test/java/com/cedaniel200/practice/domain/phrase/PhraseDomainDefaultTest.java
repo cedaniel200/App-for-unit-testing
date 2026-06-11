@@ -2,55 +2,46 @@ package com.cedaniel200.practice.domain.phrase;
 
 import com.cedaniel200.practice.domain.persistence.phrase.FakePhraseDao;
 import com.cedaniel200.practice.model.Phrase;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PhraseDomainDefaultTest {
 
     private PhraseDomain phraseDomain;
 
-    @Before
-    public void setup(){
+    @BeforeEach
+    void setup(){
         phraseDomain = new PhraseDomainDefault(new FakePhraseDao());
     }
 
     @Test
-    public void mustBeSuccessfulWhenCreateMethodReturnTheCorrectId(){
+    void mustBeSuccessfulWhenCreateMethodReturnTheCorrectId(){
         long expected = 0;
-
         long idActual = phraseDomain.create("a phrase", "Cesar");
-
-        Assert.assertEquals(expected, idActual);
-        Assert.assertEquals("Cesar", phraseDomain.getPhrase(idActual).getAuthor());
+        assertEquals(expected, idActual);
+        assertEquals("Cesar", phraseDomain.getPhrase(idActual).getAuthor());
     }
 
     @Test
-    public void mustBeSuccessfulWhenCreateMethodAssignsAnonymousToAnEmptyAuthor(){
-        long expected = 0;
-
+    void mustBeSuccessfulWhenCreateMethodAssignsAnonymousToAnEmptyAuthor(){
         long idActual = phraseDomain.create("a phrase", "");
-
-        Assert.assertEquals("anonymous", phraseDomain.getPhrase(idActual).getAuthor());
+        assertEquals("anonymous", phraseDomain.getPhrase(idActual).getAuthor());
     }
 
     @Test
-    public void mustBeSuccessfulWhenCreateMethodAssignsAnonymousToANullAuthor(){
-        long expected = 0;
-
+    void mustBeSuccessfulWhenCreateMethodAssignsAnonymousToANullAuthor(){
         long idActual = phraseDomain.create("a phrase", null);
-
-        Assert.assertEquals("anonymous", phraseDomain.getPhrase(idActual).getAuthor());
+        assertEquals("anonymous", phraseDomain.getPhrase(idActual).getAuthor());
     }
 
     @Test
-    public void mustBeSuccessfulWhenGetPhraseMethodReturnAPhrase(){
+    void mustBeSuccessfulWhenGetPhraseMethodReturnAPhrase(){
         long id = phraseDomain.create("a phrase", "");
-
         Phrase phrase = phraseDomain.getPhrase(id);
-
-        Assert.assertEquals(id, phrase.getId());
-        Assert.assertTrue("a phrase".equalsIgnoreCase(phrase.getPhrase()));
+        assertEquals(id, phrase.getId());
+        assertTrue("a phrase".equalsIgnoreCase(phrase.getPhrase()));
     }
 
 }

@@ -1,23 +1,23 @@
 package com.cedaniel200.practice.domain.greeting;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GreetingDomainDefaultTest {
 
     private GreetingDomain greetingDomain;
 
-    @Before
-    public void setup() {
+    @BeforeEach
+    void setup() {
         greetingDomain = new GreetingDomainDefault();
     }
 
-    //metodo static
     @Test
-    public void mustBeSuccessfulIfReturnHola() {
+    void mustBeSuccessfulIfReturnHola() {
         String expectedGreeting = "Hola";
         try (MockedStatic<GreetingByLanguage> greetingByLanguage = Mockito.mockStatic(GreetingByLanguage.class)) {
             greetingByLanguage.when(() -> GreetingByLanguage.getGreeting("es"))
@@ -25,12 +25,12 @@ public class GreetingDomainDefaultTest {
 
             String greeting = greetingDomain.greet("es");
 
-            Assert.assertEquals(expectedGreeting, greeting);
+            assertEquals(expectedGreeting, greeting);
         }
     }
 
     @Test
-    public void mustBeSuccessfulIfReturnUnsupportedLanguage() {
+    void mustBeSuccessfulIfReturnUnsupportedLanguage() {
         String expectedGreeting = "unsupported language";
         try (MockedStatic<GreetingByLanguage> greetingByLanguage = Mockito.mockStatic(GreetingByLanguage.class)) {
             greetingByLanguage.when(() -> GreetingByLanguage.getGreeting("it"))
@@ -38,7 +38,7 @@ public class GreetingDomainDefaultTest {
 
             String greeting = greetingDomain.greet("it");
 
-            Assert.assertEquals(expectedGreeting, greeting);
+            assertEquals(expectedGreeting, greeting);
         }
     }
 

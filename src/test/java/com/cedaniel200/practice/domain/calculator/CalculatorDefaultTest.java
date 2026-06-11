@@ -1,16 +1,13 @@
 package com.cedaniel200.practice.domain.calculator;
 
 import com.cedaniel200.practice.domain.calculator.operation.*;
-import junitparams.JUnitParamsRunner;
-import junitparams.Parameters;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(JUnitParamsRunner.class)
 public class CalculatorDefaultTest {
 
     private Adder adder;
@@ -19,9 +16,8 @@ public class CalculatorDefaultTest {
     private Divider divider;
     private Calculator calculator;
 
-    @Before
-    public void setup(){
-        // Arrange
+    @BeforeEach
+    void setup(){
         adder = new AdderDefault();
         subtractor = new SubtractorDefault();
         multiplier = new MultiplierDefault();
@@ -30,112 +26,78 @@ public class CalculatorDefaultTest {
     }
 
     @Test
-    public void mustBeSuccessfulIfAddPositiveIntegerNumbers(){
-        // Arrange
+    void mustBeSuccessfulIfAddPositiveIntegerNumbers(){
         int expected = 10;
-
-        // Act
         int actual = calculator.add(5, 5);
-
-        // Assert
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
-    @Test
-    @Parameters({"1, 2, 3",
-            "-10, 30, 20",
-            "15, -5, 10",
-            "-5, -10, -15" })
-    public void mustBeSuccessfulIfAddIntegerNumbersWithParam(int firstNumber, int secondNumber, int expectedValue){
-        // Act
+    @ParameterizedTest
+    @CsvSource({"1, 2, 3", "-10, 30, 20", "15, -5, 10", "-5, -10, -15"})
+    void mustBeSuccessfulIfAddIntegerNumbersWithParam(int firstNumber, int secondNumber, int expectedValue){
         int actual = calculator.add(firstNumber, secondNumber);
-
-        // Assert
-        Assert.assertEquals(expectedValue, actual);
+        assertEquals(expectedValue, actual);
     }
 
     @Test
-    public void mustBeSuccessfulIfAddNegativeIntegerNumbers(){
+    void mustBeSuccessfulIfAddNegativeIntegerNumbers(){
         int expected = -6;
-
         int actual = calculator.add(-3, -3);
-
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void mustBeSuccessfulIfSubtractPositiveIntegerNumbers(){
+    void mustBeSuccessfulIfSubtractPositiveIntegerNumbers(){
         int expected = -6;
-
         int actual = calculator.subtract(10, 16);
-
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void mustBeSuccessfulIfSubtractNegativeIntegerNumbers(){
+    void mustBeSuccessfulIfSubtractNegativeIntegerNumbers(){
         int expected = 0;
-
         int actual = calculator.subtract(-3, -3);
-
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void mustBeSuccessfulIfMultiplyPositiveIntegerNumbers(){
+    void mustBeSuccessfulIfMultiplyPositiveIntegerNumbers(){
         int expected = 15;
-
         int actual = calculator.multiply(3, 5);
-
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void mustBeSuccessfulIfMultiplyNegativeIntegerNumbers(){
+    void mustBeSuccessfulIfMultiplyNegativeIntegerNumbers(){
         int expected = 9;
-
         int actual = calculator.multiply(-3, -3);
-
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void mustBeSuccessfulIfMultiplyByZero(){
+    void mustBeSuccessfulIfMultiplyByZero(){
         int expected = 0;
-
         int actual = calculator.multiply(2, 0);
-
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void mustBeSuccessfulIfDividePositiveIntegerNumbers(){
+    void mustBeSuccessfulIfDividePositiveIntegerNumbers(){
         int expected = 3;
-
         int actual = calculator.divide(9, 3);
-
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void mustBeSuccessfulIfDivideNegativeIntegerNumbers(){
+    void mustBeSuccessfulIfDivideNegativeIntegerNumbers(){
         int expected = 3;
-
         int actual = calculator.divide(-9, -3);
-
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void mustBeSuccessfulIfThrowAnException(){
-        // Primera forma de validar si se lanza una excepción
-        try {
-            int actual = calculator.divide(8, 0);
-
-            fail("Did not throw the Arithmetic Exception");
-        }catch (ArithmeticException e){
-
-        }
+    void mustBeSuccessfulIfThrowAnException(){
+        assertThrows(ArithmeticException.class, () -> calculator.divide(8, 0));
     }
 
 }

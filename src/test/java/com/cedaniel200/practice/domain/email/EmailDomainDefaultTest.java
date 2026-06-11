@@ -1,36 +1,35 @@
 package com.cedaniel200.practice.domain.email;
 
 import com.cedaniel200.practice.model.Email;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EmailDomainDefaultTest {
 
     private EmailDomain emailDomain;
     private EmailHandleStubSpy emailHandleStub;
 
-    @Before
-    public void setup(){
+    @BeforeEach
+    void setup(){
         emailHandleStub = new EmailHandleStubSpy();
         emailDomain = new EmailDomainDefault(emailHandleStub);
     }
 
     @Test
-    public void mustBeSuccessfulIfEmailIsSend(){
+    void mustBeSuccessfulIfEmailIsSend(){
         Email email = new EmailDummy();
-
         emailDomain.sendMail(email);
-
-        Assert.assertEquals(1, emailHandleStub.getAmountOfEmailsSent());
-        Assert.assertEquals(0, emailHandleStub.getAmountOfEmailsNotSend());
+        assertEquals(1, emailHandleStub.getAmountOfEmailsSent());
+        assertEquals(0, emailHandleStub.getAmountOfEmailsNotSend());
     }
-    @Test
-    public void mustBeSuccessfulIfEmailIsNotSend(){
-        emailDomain.sendMail(null);
 
-        Assert.assertEquals(0, emailHandleStub.getAmountOfEmailsSent());
-        Assert.assertEquals(1, emailHandleStub.getAmountOfEmailsNotSend());
+    @Test
+    void mustBeSuccessfulIfEmailIsNotSend(){
+        emailDomain.sendMail(null);
+        assertEquals(0, emailHandleStub.getAmountOfEmailsSent());
+        assertEquals(1, emailHandleStub.getAmountOfEmailsNotSend());
     }
 
 }
@@ -41,11 +40,13 @@ class EmailHandleStubSpy implements EmailHandler {
     private int emailsNotSend = 0;
 
     @Override
-    public void send(Email email) {
+    public boolean send(Email email) {
         if (email != null) {
             emailsSend++;
+            return true;
         } else {
             emailsNotSend++;
+            return false;
         }
     }
 

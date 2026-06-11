@@ -2,66 +2,56 @@ package com.cedaniel200.practice.repository.user;
 
 import com.cedaniel200.practice.exception.ServiceNotAvailableException;
 import com.cedaniel200.practice.model.User;
-import com.cedaniel200.practice.model.UsersSummary;
 import com.cedaniel200.practice.service.UserService;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.MockitoAnnotations.initMocks;
 
 public class UserRepositoryDefaultTest {
 
-    private UsersSummary expectedUserSummary;
+    private List<User> expectedUsers;
     private User expectedUser;
-    private HashMap<String, User> hashMap;
     @Mock
-    private Response<HashMap<String, User>> userResponse;
+    private Response<List<User>> listResponse;
     @Mock
-    private Call<HashMap<String, User>> userCall;
+    private Call<List<User>> listCall;
     @Mock
-    private Response<UsersSummary> usersSummaryResponse;
+    private Response<User> userResponse;
     @Mock
-    private Call<UsersSummary> usersSummaryCall;
+    private Call<User> userCall;
     @Mock
     private UserService service;
     @Mock
     private Retrofit retrofit;
     private UserRepository userRepository;
 
-    @Before
-    @SuppressWarnings(value = "Unchecked")
-    public void setup() throws IOException {
-        initMocks(this);
-
+    @BeforeEach
+    @SuppressWarnings("unchecked")
+    void setup() throws IOException {
+        MockitoAnnotations.openMocks(this);
         expectedUser = new User();
         expectedUser.setId(1);
-        hashMap = new HashMap<>();
-        hashMap.put("data", expectedUser);
-
-        expectedUserSummary = new UsersSummary();
-        List<User> expectedUsers = new ArrayList<>();
+        expectedUsers = new ArrayList<>();
         expectedUsers.add(new User());
         expectedUsers.add(new User());
-        expectedUserSummary.setData(expectedUsers);
 
-
-        Mockito.when(userResponse.body()).thenReturn(hashMap);
-        Mockito.when(usersSummaryResponse.body()).thenReturn(expectedUserSummary);
+        Mockito.when(listResponse.body()).thenReturn(expectedUsers);
+        Mockito.when(userResponse.body()).thenReturn(expectedUser);
+        Mockito.when(listCall.execute()).thenReturn(listResponse);
         Mockito.when(userCall.execute()).thenReturn(userResponse);
-        Mockito.when(usersSummaryCall.execute()).thenReturn(usersSummaryResponse);
-        Mockito.when(service.listUsers()).thenReturn(usersSummaryCall);
+        Mockito.when(service.listUsers()).thenReturn(listCall);
         Mockito.when(service.findById(anyInt())).thenReturn(userCall);
         Mockito.when(retrofit.create(UserService.class)).thenReturn(service);
 
@@ -69,30 +59,31 @@ public class UserRepositoryDefaultTest {
     }
 
     @Test
-    public void mustBeSuccessfulIfReturnAnUserList() throws ServiceNotAvailableException {
-        UsersSummary actualUsersSummary = userRepository.list();
+    void mustBeSuccessfulIfReturnAnUserList() throws ServiceNotAvailableException {
+        List<User> actualUsers = userRepository.list();
 
-        Assert.assertEquals(expectedUserSummary.toString(), actualUsersSummary.toString());
-    }
-
-    @Test(expected = ServiceNotAvailableException.class)
-    public void mustBeSuccessfulIfListMethodThrowAReturnAnServiceNotAvailableException() throws IOException {
-        Mockito.when(usersSummaryCall.execute()).thenThrow(new IOException());
-
-        userRepository.list();
+        assertEquals(expectedUsers, actualUsers);
     }
 
     @Test
-    public void mustBeSuccessfulIfReturnAnUser() throws ServiceNotAvailableException {
+    void mustBeSuccessfulIfListMethodThrowServiceNotAvailableException() throws IOException {
+        Mockito.when(listCall.execute()).thenThrow(new IOException());
+
+        assertThrows(ServiceNotAvailableException.class, () -> userRepository.list());
+    }
+
+    @Test
+    void mustBeSuccessfulIfReturnAnUser() throws ServiceNotAvailableException {
         User actualUser = userRepository.findById(1);
 
-        Assert.assertEquals(expectedUser.getId(), actualUser.getId());
+        assertEquals(expectedUser.getId(), actualUser.getId());
     }
 
-    @Test(expected = ServiceNotAvailableException.class)
-    public void mustBeSuccessfulIfFindByIdMethodThrowAReturnAnServiceNotAvailableException() throws IOException {
+    @Test
+    void mustBeSuccessfulIfFindByIdMethodThrowServiceNotAvailableException() throws IOException {
         Mockito.when(userCall.execute()).thenThrow(new IOException());
 
-        userRepository.findById(1);
+        assertThrows(ServiceNotAvailableException.class, () -> userRepository.findById(1));
     }
+
 }

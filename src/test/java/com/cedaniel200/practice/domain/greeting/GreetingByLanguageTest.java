@@ -1,29 +1,30 @@
 package com.cedaniel200.practice.domain.greeting;
 
-import junitparams.JUnitParamsRunner;
-import junitparams.Parameters;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-@RunWith(JUnitParamsRunner.class)
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class GreetingByLanguageTest {
 
-    private Object[] greetings() {
-        return new Object[] {
-                new Object[] { "es", "Hola"},
-                new Object[] { "en", "Hello"},
-                new Object[] { "pt", "Ola"},
-                new Object[] { "it", "unsupported language"},
-        };
+    private static Stream<Arguments> greetings() {
+        return Stream.of(
+                Arguments.of("es", "Hola"),
+                Arguments.of("en", "Hello"),
+                Arguments.of("pt", "Ola"),
+                Arguments.of("it", "unsupported language")
+        );
     }
 
-    @Test
-    @Parameters(method = "greetings")
-    public void mustBeSuccessfulIfReturnGreetingCorrectByLanguage(String language, String expected){
+    @ParameterizedTest
+    @MethodSource("greetings")
+    void mustBeSuccessfulIfReturnGreetingCorrectByLanguage(String language, String expected){
         String actual = GreetingByLanguage.getGreeting(language);
-
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
 }
