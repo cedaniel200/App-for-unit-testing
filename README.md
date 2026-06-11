@@ -32,6 +32,16 @@ Para ejecutar unit-testing-app en consola interactiva a traves del Jar generado,
 y cualquier comando disponible:
 
     java -jar unit-testing-app-[version].jar
+
+Si se requiere configurar variables de entorno (como las credenciales de email):
+
+    export EMAIL_USERNAME=micorreo@gmail.com
+    export EMAIL_PASSWORD=abcd1234efgh5678
+    java -jar unit-testing-app-1.0.0.jar
+
+O en una sola línea:
+
+    EMAIL_USERNAME=micorreo@gmail.com EMAIL_PASSWORD=abcd1234efgh5678 java -jar unit-testing-app-1.0.0.jar
     
 Para ejecutar **unit-testing-app** desde el **IDE** solo se debe ejecutar la clase **App** ubicada en el paquete **com.cedaniel200.practice.**
 
@@ -60,7 +70,7 @@ La aplicación cuenta con los siguientes comandos o funcionalidades:
 
     greet [--language] string
 
-**User Commands** (Consumen los servicios en https://reqres.in)
+**User Commands** (Consumen los servicios en https://jsonplaceholder.typicode.com)
 
     find-by-id [--id] int
     
@@ -127,4 +137,22 @@ estas se deben ejecutar en el mismo orden (Clean, test, jacocoTestReport).
         Capa donde se encuentran las clases que representan clientes HTTP para comunicación con 
         servicios en la nube
         
+## Configuración de variables de entorno
+
+### Email
+
+| Variable | Descripción |
+|---|---|
+| `EMAIL_USERNAME` | Correo Gmail para enviar |
+| `EMAIL_PASSWORD` | App password de Gmail |
+
+Ejemplo:
+
+```bash
+export EMAIL_USERNAME=micorreo@gmail.com
+export EMAIL_PASSWORD=abcd1234efgh5678
+```
+
+Si no se configuran, el comando `send` usará los valores por defecto y fallará con un mensaje de error.
+
 ## Si tiene alguna pregunta, puede escribirme a cdanielmg200@gmail.com  
