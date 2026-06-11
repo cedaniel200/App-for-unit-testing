@@ -34,7 +34,7 @@ java -jar build/libs/unit-testing-app-1.0.0.jar   # ejecutar app
 - **DI por constructor** via Spring (`@Configuration` en `config/`)
 
 ## Testing — para estudiantes
-- Existen tests unitarios en cada subpaquete de dominio: `calculator/`, `email/`, `greeting/`, `phrase/`, `user/`
+- Solo existe `CalculatorDefaultTest.java` (stub con TODO) — el repo existe para que los estudiantes escriban los tests. La rama `solucion-java11` contiene una solución de referencia con todos los tests.
 - Cada test debe aislar la capa `domain` mockeando dependencias
 - JUnit 5 (Jupiter) con `@Test`, `@BeforeEach`, `@ParameterizedTest`
 - Mockito 5.x con `@Mock`, `@InjectMocks`, `MockitoAnnotations.openMocks(this)` y `Mockito.mockStatic()` para métodos estáticos (inline mock maker activado via SPI)
