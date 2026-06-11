@@ -15,7 +15,7 @@ java -jar build/libs/unit-testing-app-1.0.0.jar   # ejecutar app
 ## Stack
 - Java 17 (`sourceCompatibility = 17`), Gradle 9.5.1 wrapper
 - Spring Boot 3.5.14, Spring Shell 3.4.2, Retrofit 2 + Gson
-- **Tests**: JUnit 4.12, Mockito 2.19.0, PowerMock 2.0.0, JUnitParams 1.1.1 (JUnit Vintage Engine para compatibilidad con Gradle 9)
+- **Tests**: JUnit 5 (Jupiter 5.12), Mockito 5.14.0 (inline mock maker)
 - **E2E / Integration**: JUnit 5 (Jupiter), Spring Shell Test (ShellTestClient), Spring Boot Test (@SpringBootTest, @TestConfiguration)
 - **Cobertura**: JaCoCo 0.8.15 (excluye `config/`, `console/`, `model/`, `App`)
 
@@ -34,13 +34,13 @@ java -jar build/libs/unit-testing-app-1.0.0.jar   # ejecutar app
 - **DI por constructor** via Spring (`@Configuration` en `config/`)
 
 ## Testing — para estudiantes
-- Solo existe `CalculatorDefaultTest.java` (stub con TODO) — el repo existe para que los estudiantes escriban los tests
+- Solo existe `CalculatorDefaultTest.java` (stub con TODO) — el repo existe para que los estudiantes escriban los tests. La rama `solucion` contiene una solución de referencia con todos los tests.
 - Cada test debe aislar la capa `domain` mockeando dependencias
-- JUnit 4 únicamente, no JUnit 5 (JUnit 5 es solo para E2E / Integration)
-- `@RunWith(MockitoJUnitRunner.class)` o `MockitoAnnotations.initMocks(this)` (Mockito 2.x)
-- PowerMock 2.0.0 disponible para métodos estáticos o constructores (usar con moderación)
+- JUnit 5 (Jupiter) con `@Test`, `@BeforeEach`, `@ParameterizedTest`
+- Mockito 5.x con `@Mock`, `@InjectMocks`, `MockitoAnnotations.openMocks(this)` y `Mockito.mockStatic()` para métodos estáticos (inline mock maker activado via SPI)
+- `assertThrows` para validar excepciones en lugar de `@Rule ExpectedException`
+- `@CsvSource` o `@MethodSource` para tests parametrizados (reemplaza JUnitParams)
 - Naming de clases: `*Test.java`
-- JUnitParams disponible para tests parametrizados
 - Ejecutar con: `./gradlew unitTest`
 
 ## E2E / Integration Testing (mantenimiento de la app)
