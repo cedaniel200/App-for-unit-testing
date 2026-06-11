@@ -42,3 +42,28 @@ spring-shell.log
 
 # Jacoco
 **/jacoco/
+
+# OpenCode (cachés, logs, config local)
+.opencode/cache/
+.opencode/logs/
+.opencode/.atl/
+.opencode/state.json
+.opencode/*local.json
+.opencode/secrets/
+
+# Environment / secrets locales
+.env
+.env.*
+
+# Archivos locales de configuración (Spring Boot overrides)
+application-local.properties
+application-local.yml
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Editores
+*.swp
+*.swo
+*~
