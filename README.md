@@ -20,10 +20,8 @@ Aplicación de consola creada para practicar **pruebas unitarias**. El repositor
 
 ## What you'll practice
 
-- **JUnit 4** — escribir pruebas unitarias con asserts, excepciones esperadas y assertions personalizadas
-- **Mockito 2** — aislar la capa de dominio mockeando dependencias con `@Mock` e `@InjectMocks`
-- **JUnitParams** — pruebas parametrizadas para cubrir múltiples casos con un solo método
-- **PowerMock** — mockear constructores y métodos estáticos en casos excepcionales (con moderación)
+- **JUnit 5 (Jupiter)** — escribir pruebas unitarias con asserts, excepciones esperadas y `@ParameterizedTest`
+- **Mockito 5** — aislar la capa de dominio mockeando dependencias con `@Mock` y `Mockito.mockStatic()`
 - **JaCoCo** — medir cobertura del código y buscar líneas no cubiertas
 
 ## Tech Stack
@@ -35,9 +33,8 @@ Aplicación de consola creada para practicar **pruebas unitarias**. El repositor
 | Spring Shell | 3.4.2 |
 | Gradle | 9.5.1 |
 | Retrofit 2 + Gson | 2.x |
-| JUnit 4 | 4.12 |
-| Mockito | 2.19.0 |
-| PowerMock | 2.0.0 |
+| JUnit 5 (Jupiter) | 5.12 |
+| Mockito | 5.14.0 |
 | JaCoCo | 0.8.15 |
 
 ## Getting Started
@@ -141,7 +138,7 @@ Para generar reporte de cobertura:
 
 El reporte se abre en `build/reports/jacoco/jacocoUnitTestReport/html/index.html`.
 
-El stub inicial es `CalculatorDefaultTest.java`. Escribe los tests para cada clase de dominio:
+Escribe los tests para cada clase de dominio:
 
 | Domain class | What to test |
 |--------------|--------------|
