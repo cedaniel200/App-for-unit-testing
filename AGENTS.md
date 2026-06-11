@@ -67,3 +67,11 @@ java -jar build/libs/unit-testing-app-1.0.0.jar   # ejecutar app
 - **Documentación técnica**: usar `context7` para consultar APIs de librerías del stack
 - **Guardar con `engram_mem_save`**: decisiones, bugs corregidos, configuraciones, patrones nuevos (usar formato `**What**/**Why**/**Where**/**Learned**`)
 
+## Skill Registry
+
+When working on this project, load the relevant skill(s) BEFORE writing any code. Follow ALL patterns and rules from the loaded skill. Multiple skills can apply simultaneously.
+
+| Skill Name | Path | Description / When to Use |
+| :--- | :--- | :--- |
+| `readme-writer` | `.opencode/skills/readme-writer/SKILL.md` | Úsala cuando necesites crear o mejorar un README.md con documentación moderna de GitHub. Aplica estructura, formato GFM, badges y principios Diátaxis.
+
