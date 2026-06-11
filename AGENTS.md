@@ -48,4 +48,11 @@ java -jar build/libs/unit-testing-app-1.0.0.jar   # ejecutar app
 - **No asumir tecnologías**: No usar librerías, frameworks o herramientas que no estén en el stack definido en `build.gradle`. Si una tecnología no está en el proyecto, preguntar antes de incorporarla
 - **No inventar entidades**: No crear nombres de clases, métodos o datos que no existan en el código o no estén definidos en el dominio
 - **No alucinar**: No inventar librerías, dependencias o APIs. Solo usar lo que se pueda verificar en el código fuente
-- **Context7**: Cuando necesites buscar documentación técnica, usa las herramientas de `context7`
+
+## Memoria entre sesiones (Engram + Context7)
+- **Ciclo automático**:
+  - `engram_mem_context` al iniciar sesión → `engram_mem_save` tras cada tarea completada → `engram_mem_session_summary` al cerrar
+- **Antes de decisiones de arquitectura**, buscar memoria previa con `engram_mem_search` para evitar decisiones contradictorias
+- **Documentación técnica**: usar `context7` para consultar APIs de librerías del stack
+- **Guardar con `engram_mem_save`**: decisiones, bugs corregidos, configuraciones, patrones nuevos (usar formato `**What**/**Why**/**Where**/**Learned**`)
+
