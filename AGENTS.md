@@ -2,9 +2,12 @@
 
 ## Comandos esenciales
 ```bash
-./gradlew bootJar                          # build
-./gradlew test                              # tests
-./gradlew clean test jacocoTestReport       # tests + cobertura (reporte: build/reports/jacoco/test/html/index.html)
+./gradlew unitTest                           # solo pruebas unitarias (para estudiantes)
+./gradlew e2eTest                             # solo pruebas end-to-end de consola (mantenimiento)
+./gradlew integrationTest                     # solo pruebas de integracion con servicios externos (mantenimiento)
+./gradlew test                                # todas las pruebas (unitarias + e2e + integracion)
+./gradlew clean test jacocoTestReport         # todas + cobertura (reporte: build/reports/jacoco/test/html/index.html)
+./gradlew bootJar                             # build
 java -jar build/libs/unit-testing-app-1.0.0.jar   # ejecutar app
 ```
 
@@ -12,6 +15,7 @@ java -jar build/libs/unit-testing-app-1.0.0.jar   # ejecutar app
 - Java 17 (`sourceCompatibility = 17`), Gradle 9.5.1 wrapper
 - Spring Boot 3.5.14, Spring Shell 3.4.2, Retrofit 2 + Gson
 - **Tests**: JUnit 4.12, Mockito 2.19.0, PowerMock 2.0.0, JUnitParams 1.1.1 (JUnit Vintage Engine para compatibilidad con Gradle 9)
+- **E2E / Integration**: JUnit 5 (Jupiter), Spring Shell Test (ShellTestClient), Spring Boot Test (@SpringBootTest, @TestConfiguration)
 - **Cobertura**: JaCoCo 0.8.15 (excluye `config/`, `console/`, `model/`, `App`)
 
 ## Arquitectura (Clean Architecture / DDD)
@@ -28,14 +32,20 @@ java -jar build/libs/unit-testing-app-1.0.0.jar   # ejecutar app
 - **DAO**: `PhraseDao`
 - **DI por constructor** via Spring (`@Configuration` en `config/`)
 
-## Testing (TDD)
-- Solo existe `CalculatorDefaultTest.java` (stub con TODO) — el repo existe para que escribas los tests
+## Testing (TDD) — para estudiantes
+- Solo existe `CalculatorDefaultTest.java` (stub con TODO) — el repo existe para que los estudiantes escriban los tests
 - Cada test debe aislar la capa `domain` mockeando dependencias
-- JUnit 4 únicamente, no JUnit 5
+- JUnit 4 únicamente, no JUnit 5 (JUnit 5 es solo para E2E / Integration)
 - `@RunWith(MockitoJUnitRunner.class)` o `MockitoAnnotations.initMocks(this)` (Mockito 2.x)
 - PowerMock 2.0.0 disponible para métodos estáticos o constructores (usar con moderación)
 - Naming de clases: `*Test.java`
 - JUnitParams disponible para tests parametrizados
+- Ejecutar con: `./gradlew unitTest`
+
+## E2E / Integration Testing (mantenimiento de la app)
+- **`e2eTest`**: Pruebas que interactuan con la consola Spring Shell via `ShellTestClient`. Garantizan que los comandos (`add`, `subtract`, `greet`, `list`, etc.) funcionan correctamente tras cualquier cambio. Mockean dependencias externas (HTTP, email) para ser auto-contenidas.
+- **`integrationTest`**: Pruebas que conectan con servicios reales (JSONPlaceholder via Retrofit). Verifican que `UserRepository` se comunica correctamente con la API externa.
+- **IMPORTANTE**: Estas pruebas son **exclusivamente para mantenimiento de la app**. Los estudiantes NO deben enfocarse en ellas. El objetivo de aprendizaje son las **pruebas unitarias** (`./gradlew unitTest`), que ejecutan los tests `*Test.java` (sin sufijo `E2E` ni `Integration`). Alli el estudiante debe implementar los casos de prueba para cada clase de dominio.
 
 ## Commits
 - Mensajes de commit en español

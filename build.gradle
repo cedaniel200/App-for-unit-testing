@@ -21,7 +21,37 @@ jacoco {
 }
 
 tasks.named('test') {
+    useJUnitPlatform()
     failOnNoDiscoveredTests = false
+}
+
+tasks.register('unitTest', Test) {
+    description = 'Ejecuta solo pruebas unitarias (para estudiantes)'
+    group = 'verification'
+    useJUnitPlatform()
+    failOnNoDiscoveredTests = false
+    exclude '**/*E2E*'
+    exclude '**/*Integration*'
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+}
+
+tasks.register('e2eTest', Test) {
+    description = 'Ejecuta pruebas end-to-end de consola (mantenimiento)'
+    group = 'verification'
+    useJUnitPlatform()
+    include '**/*E2E*'
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+}
+
+tasks.register('integrationTest', Test) {
+    description = 'Ejecuta pruebas de integracion con servicios externos (mantenimiento)'
+    group = 'verification'
+    useJUnitPlatform()
+    include '**/*Integration*'
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
 }
 
 jacocoTestReport {
@@ -70,6 +100,12 @@ dependencies {
     testImplementation group: 'org.powermock', name: 'powermock-api-mockito2', version: '2.0.0'
     testImplementation group: 'junit', name: 'junit', version: '4.12'
     testImplementation 'pl.pragmatists:JUnitParams:1.1.1'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.mockito'
+        exclude group: 'org.junit.vintage'
+    }
+    testImplementation 'org.springframework.shell:spring-shell-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.shell:spring-shell-starter'
