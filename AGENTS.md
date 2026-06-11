@@ -9,10 +9,10 @@ java -jar build/libs/unit-testing-app-1.0.0.jar   # ejecutar app
 ```
 
 ## Stack
-- Java 8 (`sourceCompatibility = 1.8`), Gradle 7.1 wrapper
-- Spring Boot 2.6.7, Spring Shell 2.0.1, Retrofit 2 + Gson
-- **Tests**: JUnit 4.12, Mockito 2.19.0, PowerMock 2.0.0, JUnitParams 1.1.1
-- **Cobertura**: JaCoCo 0.8.8 (excluye `config/`, `console/`, `model/`, `App`)
+- Java 17 (`sourceCompatibility = 17`), Gradle 9.5.1 wrapper
+- Spring Boot 3.5.14, Spring Shell 3.4.2, Retrofit 2 + Gson
+- **Tests**: JUnit 4.12, Mockito 2.19.0, PowerMock 2.0.0, JUnitParams 1.1.1 (JUnit Vintage Engine para compatibilidad con Gradle 9)
+- **Cobertura**: JaCoCo 0.8.15 (excluye `config/`, `console/`, `model/`, `App`)
 
 ## Arquitectura (Clean Architecture / DDD)
 - Entrypoint: `com.cedaniel200.practice.App` (`@SpringBootApplication`)
