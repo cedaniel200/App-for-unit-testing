@@ -18,12 +18,12 @@ public class UserCommands {
         this.userDomain = userDomain;
     }
 
-    @ShellMethod(value = "List the users")
+    @ShellMethod(value = "Listar los usuarios")
     public String list(){
         try {
             return tryList();
         } catch (Exception e) {
-            return "please try again. Error : " + e.getMessage();
+            return "intenta de nuevo. Error : " + e.getMessage();
         }
     }
 
@@ -37,12 +37,12 @@ public class UserCommands {
         return listOfUsers.toString();
     }
 
-    @ShellMethod(value = "find By Id")
+    @ShellMethod(value = "Buscar usuario por id")
     public String findById(int id){
         try {
             return tryFindById(id);
         } catch (Exception e) {
-            return "please try again. Error : " + e.getMessage();
+            return "intenta de nuevo. Error : " + e.getMessage();
         }
     }
 

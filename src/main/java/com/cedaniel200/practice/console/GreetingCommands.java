@@ -13,7 +13,7 @@ public class GreetingCommands {
         this.greetingDomain = greetingDomain;
     }
 
-    @ShellMethod(value = "Say hello according to the language [es-en-pt]")
+    @ShellMethod(value = "Saludar segun el idioma [es-en-pt]")
     public String greet(String language){
         return greetingDomain.greet(language);
     }

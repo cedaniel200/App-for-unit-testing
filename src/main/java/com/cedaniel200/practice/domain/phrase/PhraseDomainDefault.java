@@ -5,7 +5,7 @@ import com.cedaniel200.practice.persistence.phrase.PhraseDao;
 
 public class PhraseDomainDefault implements PhraseDomain {
 
-    private static final String DEFAULT_AUTHOR = "anonymous";
+    private static final String DEFAULT_AUTHOR = "anonimo";
     private PhraseDao phraseDao;
 
     public PhraseDomainDefault(PhraseDao phraseDao) {

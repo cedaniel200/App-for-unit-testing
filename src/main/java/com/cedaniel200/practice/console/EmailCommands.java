@@ -16,7 +16,7 @@ public class EmailCommands {
         this.emailDomain = emailDomain;
     }
 
-    @ShellMethod(value = "Send email")
+    @ShellMethod(value = "Enviar correo electronico")
     public String send(String to, String subject, String message) {
         boolean sent = emailDomain.sendMail(new EmailData(to, subject, message));
         return sent ? SUCCESS_MESSAGE : FAILURE_MESSAGE;
