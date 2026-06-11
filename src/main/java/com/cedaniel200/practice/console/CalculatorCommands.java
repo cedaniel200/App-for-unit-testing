@@ -7,7 +7,7 @@ import org.springframework.shell.standard.ShellMethod;
 @ShellComponent
 public class CalculatorCommands {
 
-    private static final String RESULT_FORMAT = "el resultado de la %s es: %d";
+    private static final String RESULT_FORMAT = "the result of the %s is: %d";
 
     private Calculator calculator;
 
@@ -15,23 +15,23 @@ public class CalculatorCommands {
         this.calculator = calculator;
     }
 
-    @ShellMethod(value = "Sumar dos numeros enteros")
+    @ShellMethod(value = "Add two whole numbers")
     public String add(int firstNumber, int secondNumber){
-        return String.format(RESULT_FORMAT, "suma", calculator.add(firstNumber, secondNumber));
+        return String.format(RESULT_FORMAT, "sum", calculator.add(firstNumber, secondNumber));
     }
 
-    @ShellMethod(value = "Restar dos numeros enteros")
+    @ShellMethod(value = "subtract two whole numbers")
     public String subtract(int firstNumber, int secondNumber){
-        return String.format(RESULT_FORMAT, "resta", calculator.subtract(firstNumber, secondNumber));
+        return String.format(RESULT_FORMAT, "subtract", calculator.subtract(firstNumber, secondNumber));
     }
 
-    @ShellMethod(value = "Multiplicar dos numeros enteros")
+    @ShellMethod(value = "multiply two whole numbers")
     public String multiply(int firstNumber, int secondNumber){
-        return String.format(RESULT_FORMAT, "multiplicacion", calculator.multiply(firstNumber, secondNumber));
+        return String.format(RESULT_FORMAT, "multiply", calculator.multiply(firstNumber, secondNumber));
     }
 
-    @ShellMethod(value = "Dividir dos numeros enteros")
+    @ShellMethod(value = "Divide")
     public String divide(int dividend, int divider){
-        return String.format(RESULT_FORMAT, "division", calculator.divide(dividend, divider));
+        return String.format(RESULT_FORMAT, "divide", calculator.divide(dividend, divider));
     }
 }

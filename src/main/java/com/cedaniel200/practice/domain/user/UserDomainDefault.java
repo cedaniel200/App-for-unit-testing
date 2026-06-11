@@ -24,7 +24,7 @@ public class UserDomainDefault implements UserDomain {
 
     private void validateUsers(List<User> users) throws MalformedDataException {
         if(users == null){
-            throw new MalformedDataException("la lista de usuarios tiene datos malformados");
+            throw new MalformedDataException("the user list has malformed data");
         }
     }
 
@@ -38,17 +38,17 @@ public class UserDomainDefault implements UserDomain {
 
     private void validateId(int id) throws MalformedDataException {
         if(id < 0){
-            throw new MalformedDataException("El parametro esta malformado: el id no puede ser menor que cero");
+            throw new MalformedDataException("The parameter is malformed: The id can't be less than zero");
         } else if(id == 0){
-            throw new MalformedDataException("El parametro esta malformado: el id debe ser mayor que cero");
+            throw new MalformedDataException("The parameter is malformed: The id should be greater than zero");
         }else if(id > 10){
-            throw new MalformedDataException("El parametro esta malformado: no hay un id mayor que diez");
+            throw new MalformedDataException("The parameter is malformed: There is no id greater than ten");
         }
     }
 
     private void validateUser(User user) throws MalformedDataException {
         if(user == null){
-            throw new MalformedDataException("el usuario tiene datos malformados");
+            throw new MalformedDataException("the user has malformed data");
         }
     }
 }

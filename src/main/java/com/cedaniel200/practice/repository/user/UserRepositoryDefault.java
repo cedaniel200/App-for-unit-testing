@@ -22,7 +22,7 @@ public class UserRepositoryDefault implements UserRepository {
         try {
             return tryGetList();
         } catch (IOException e) {
-            throw new ServiceNotAvailableException("Servicio de usuarios no disponible", e);
+            throw new ServiceNotAvailableException("User Service Not Available", e);
         }
     }
 
@@ -36,7 +36,7 @@ public class UserRepositoryDefault implements UserRepository {
         try {
             return tryFindById(id);
         } catch (IOException e) {
-            throw new ServiceNotAvailableException("Servicio de usuarios no disponible", e);
+            throw new ServiceNotAvailableException("User Service Not Available", e);
         }
     }
 

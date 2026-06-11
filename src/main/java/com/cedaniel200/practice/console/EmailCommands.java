@@ -8,15 +8,15 @@ import org.springframework.shell.standard.ShellMethod;
 @ShellComponent
 public class EmailCommands {
 
-    private static final String SUCCESS_MESSAGE = "Hemos intentado enviar tu correo, esperamos tengas suerte";
-    private static final String FAILURE_MESSAGE = "Error al enviar el correo. Revisa la sección 'Configuración de variables de entorno' en el README para más información";
+    private static final String SUCCESS_MESSAGE = "We tried to send your email, we hope you have luck";
+    private static final String FAILURE_MESSAGE = "Failed to send email. Check the README for more information";
     private EmailDomain emailDomain;
 
     public EmailCommands(EmailDomain emailDomain) {
         this.emailDomain = emailDomain;
     }
 
-    @ShellMethod(value = "Enviar correo electronico")
+    @ShellMethod(value = "Send email")
     public String send(String to, String subject, String message) {
         boolean sent = emailDomain.sendMail(new EmailData(to, subject, message));
         return sent ? SUCCESS_MESSAGE : FAILURE_MESSAGE;

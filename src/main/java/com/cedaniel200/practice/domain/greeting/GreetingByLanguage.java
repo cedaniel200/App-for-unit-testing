@@ -6,7 +6,7 @@ public class GreetingByLanguage {
     }
 
     public static String getGreeting(String language){
-        String greeting = "idioma no soportado";
+        String greeting = "unsupported language";
         switch(language.toLowerCase()){
             case "es":
                 greeting = "Hola";
