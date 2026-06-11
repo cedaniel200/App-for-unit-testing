@@ -10,17 +10,17 @@ La aplicación fue construída con las siguientes herramientas y lenguajes:
 * Retrofit 2
 * Okhttp 3
 * Gradle
-* Java 8
+* Java 17
 
 ### Empaquetado:
 EL proyecto se empaqueta en un .jar Para ello, se debe ejecutar el comando:
                  
-    gradle bootJar
+    ./gradlew bootJar
 
 Ese comando generará el jar con el nombre de acuerdo a la siguiente configuración ubicada en el archivo build.gradle
 
     bootJar {
-        baseName('unit-testing-app')
+        archiveBaseName = 'unit-testing-app'
         version('1.0.0')
     }
 
@@ -37,7 +37,7 @@ Para ejecutar **unit-testing-app** desde el **IDE** solo se debe ejecutar la cla
 
 Para ejecutar los test se debe ejecutar la tarea test de gradle por medio del IDE o por medio de la consola del sistema usando el comando:
 
-    gradle test
+    ./gradlew test
 
 ### Comandos de la aplicación 
 La aplicación cuenta con los siguientes comandos o funcionalidades:
@@ -96,9 +96,9 @@ La cobertura de unit-testing-app está configurada con Jacoco, se excluyen los p
 console y la clase main (App).
 Para correr la medición de cobertura se debe ejecutar el siguiente comando:
 
-    gradle clean test jacocoTestReport
+    ./gradlew clean test jacocoTestReport
 
-El reporte se encuentra en build/jacoco/test/hatml/index.html
+El reporte se encuentra en build/reports/jacoco/test/html/index.html
 
 Otra forma de hacerlo es a traves de las tareas de gradle por medio del IDE
 estas se deben ejecutar en el mismo orden (Clean, test, jacocoTestReport).
