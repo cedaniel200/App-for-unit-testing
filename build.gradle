@@ -70,6 +70,29 @@ jacocoTestReport {
     }
 }
 
+tasks.register('jacocoUnitTestReport', JacocoReport) {
+    description = 'Reporte de cobertura solo para pruebas unitarias (estudiantes)'
+    group = 'verification'
+    dependsOn unitTest
+
+    executionData.from = files("${buildDir}/jacoco/unitTest.exec")
+
+    reports {
+        xml.required = true
+        html.required = true
+    }
+
+    sourceDirectories.from = sourceSets.main.allSource.srcDirs
+    classDirectories.from = files(sourceSets.main.output.collect {
+        fileTree(dir: it, exclude: [
+                'com/cedaniel200/practice/config/**',
+                'com/cedaniel200/practice/console/**',
+                'com/cedaniel200/practice/model/**',
+                'com/cedaniel200/practice/App*'
+        ])
+    })
+}
+
 sonarqube {
     properties {
         property "sonar.branch.name", gitBranch()

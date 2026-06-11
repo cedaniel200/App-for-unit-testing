@@ -5,8 +5,9 @@
 ./gradlew unitTest                           # solo pruebas unitarias (para estudiantes)
 ./gradlew e2eTest                             # solo pruebas end-to-end de consola (mantenimiento)
 ./gradlew integrationTest                     # solo pruebas de integracion con servicios externos (mantenimiento)
-./gradlew test                                # todas las pruebas (unitarias + e2e + integracion)
-./gradlew clean test jacocoTestReport         # todas + cobertura (reporte: build/reports/jacoco/test/html/index.html)
+./gradlew test                                # todas las pruebas (mantenimiento)
+./gradlew clean test jacocoTestReport         # todas + cobertura (mantenimiento)
+./gradlew unitTest jacocoUnitTestReport       # unitarias + cobertura (estudiantes, reporte: build/reports/jacoco/jacocoUnitTestReport/html/index.html)
 ./gradlew bootJar                             # build
 java -jar build/libs/unit-testing-app-1.0.0.jar   # ejecutar app
 ```
@@ -32,7 +33,7 @@ java -jar build/libs/unit-testing-app-1.0.0.jar   # ejecutar app
 - **DAO**: `PhraseDao`
 - **DI por constructor** via Spring (`@Configuration` en `config/`)
 
-## Testing (TDD) — para estudiantes
+## Testing — para estudiantes
 - Solo existe `CalculatorDefaultTest.java` (stub con TODO) — el repo existe para que los estudiantes escriban los tests
 - Cada test debe aislar la capa `domain` mockeando dependencias
 - JUnit 4 únicamente, no JUnit 5 (JUnit 5 es solo para E2E / Integration)

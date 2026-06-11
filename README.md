@@ -28,26 +28,44 @@ Para la consiguración anterior el jar generado tendra el nombre unit-testing-ap
 ya sean mayores o menores.
 
 ### Ejecución:
-Para ejecutar unit-testing-app en consola interactiva a traves del Jar generado, se debe ejecutar el siguiente comando. A partir de ahí se puede interactuar con la consola 
-y cualquier comando disponible:
+Para ejecutar unit-testing-app en consola interactiva a través del jar generado:
 
     java -jar unit-testing-app-[version].jar
 
-Si se requiere configurar variables de entorno (como las credenciales de email):
+Si requieres configurar variables de entorno (como credenciales de email),
+consulta la sección [Configuración de variables de entorno](#configuración-de-variables-de-entorno).
 
-    export EMAIL_USERNAME=micorreo@gmail.com
-    export EMAIL_PASSWORD=abcd1234efgh5678
-    java -jar unit-testing-app-1.0.0.jar
+Para ejecutar desde el IDE, solo ejecuta la clase **App** ubicada en el paquete
+**com.cedaniel200.practice.**
 
-O en una sola línea:
+### Pruebas
 
-    EMAIL_USERNAME=micorreo@gmail.com EMAIL_PASSWORD=abcd1234efgh5678 java -jar unit-testing-app-1.0.0.jar
-    
-Para ejecutar **unit-testing-app** desde el **IDE** solo se debe ejecutar la clase **App** ubicada en el paquete **com.cedaniel200.practice.**
+**Para estudiantes — ejecutar únicamente:**
 
-Para ejecutar los test se debe ejecutar la tarea test de gradle por medio del IDE o por medio de la consola del sistema usando el comando:
+    ./gradlew unitTest
 
-    ./gradlew test
+Este comando ejecuta solo las pruebas unitarias (archivos `*Test.java`) y es el único que debes usar mientras estudias.
+
+Además, puedes generar el reporte de cobertura solo para las pruebas unitarias con:
+
+    ./gradlew unitTest jacocoUnitTestReport
+
+El reporte se genera en `build/reports/jacoco/jacocoUnitTestReport/html/index.html`.
+
+La cobertura está configurada con JaCoCo y excluye los paquetes `config/`, `console/`, `model/` y la clase `App`, ya que el objetivo es medir solo la capa de dominio.
+
+**Para mantenimiento de la aplicación:**
+
+| Comando | Qué ejecuta |
+|---------|-------------|
+| `./gradlew e2eTest` | Pruebas end-to-end de consola (`*E2E*.java`) |
+| `./gradlew integrationTest` | Pruebas de integración con servicios externos (`*Integration*.java`) |
+| `./gradlew test` | Todas las pruebas |
+| `./gradlew clean test jacocoTestReport` | Todas + reporte de cobertura global |
+
+El reporte de cobertura global se genera en `build/reports/jacoco/test/html/index.html`.
+
+> Las pruebas E2E e integrationTest consumen conexiones HTTP externas, tardan más y no son necesarias para el aprendizaje de pruebas unitarias.
 
 ### Comandos de la aplicación 
 La aplicación cuenta con los siguientes comandos o funcionalidades:
@@ -101,17 +119,7 @@ Ejemplo: **help add**, lo que nos mostraría la siguiente información:
 
 Para comandos adicionales ejecute desde consola el comando 'help' para obtener información acerca de las instrucciones disponibles.
 
-### Cobertura
-La cobertura de unit-testing-app está configurada con Jacoco, se excluyen los paquetes de clases de model, config,
-console y la clase main (App).
-Para correr la medición de cobertura se debe ejecutar el siguiente comando:
 
-    ./gradlew clean test jacocoTestReport
-
-El reporte se encuentra en build/reports/jacoco/test/html/index.html
-
-Otra forma de hacerlo es a traves de las tareas de gradle por medio del IDE
-estas se deben ejecutar en el mismo orden (Clean, test, jacocoTestReport).
 
 ### Diagrama de Arquitectura
 ![Arquitectura](Arquitectura.png)
@@ -137,7 +145,7 @@ estas se deben ejecutar en el mismo orden (Clean, test, jacocoTestReport).
         Capa donde se encuentran las clases que representan clientes HTTP para comunicación con 
         servicios en la nube
         
-## Configuración de variables de entorno
+### Configuración de variables de entorno
 
 ### Email
 
@@ -155,4 +163,4 @@ export EMAIL_PASSWORD=abcd1234efgh5678
 
 Si no se configuran, el comando `send` usará los valores por defecto y fallará con un mensaje de error.
 
-## Si tiene alguna pregunta, puede escribirme a cdanielmg200@gmail.com  
+### Si tiene alguna pregunta, puede escribirme a cdanielmg200@gmail.com  
