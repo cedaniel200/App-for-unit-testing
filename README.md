@@ -127,4 +127,22 @@ estas se deben ejecutar en el mismo orden (Clean, test, jacocoTestReport).
         Capa donde se encuentran las clases que representan clientes HTTP para comunicación con 
         servicios en la nube
         
+## Configuración de variables de entorno
+
+### Email
+
+| Variable | Descripción |
+|---|---|
+| `EMAIL_USERNAME` | Correo Gmail para enviar |
+| `EMAIL_PASSWORD` | App password de Gmail |
+
+Ejemplo:
+
+```bash
+export EMAIL_USERNAME=micorreo@gmail.com
+export EMAIL_PASSWORD=abcd1234efgh5678
+```
+
+Si no se configuran, el comando `send` usará los valores por defecto y fallará con un mensaje de error.
+
 ## Si tiene alguna pregunta, puede escribirme a cdanielmg200@gmail.com  

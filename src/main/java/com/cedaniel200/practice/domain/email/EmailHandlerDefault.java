@@ -17,12 +17,14 @@ public class EmailHandlerDefault implements EmailHandler {
     }
 
     @Override
-    public void send(Email email) {
+    public boolean send(Email email) {
         try {
             trySend(email);
             amountEmailsSent++;
+            return true;
         }catch (Exception e){
             amountEmailsNotSent++;
+            return false;
         }
     }
 
