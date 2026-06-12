@@ -3,6 +3,7 @@ package com.cedaniel200.practice.repository.user;
 import com.cedaniel200.practice.exception.ServiceNotAvailableException;
 import com.cedaniel200.practice.model.User;
 import com.cedaniel200.practice.service.UserService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -19,8 +20,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 
-public class UserRepositoryDefaultTest {
+class UserRepositoryDefaultTest {
 
+    private AutoCloseable closeable;
     private List<User> expectedUsers;
     private User expectedUser;
     @Mock
@@ -38,9 +40,8 @@ public class UserRepositoryDefaultTest {
     private UserRepository userRepository;
 
     @BeforeEach
-    @SuppressWarnings("unchecked")
     void setup() throws IOException {
-        MockitoAnnotations.openMocks(this);
+        closeable = MockitoAnnotations.openMocks(this);
         expectedUser = new User();
         expectedUser.setId(1);
         expectedUsers = new ArrayList<>();
@@ -56,6 +57,13 @@ public class UserRepositoryDefaultTest {
         Mockito.when(retrofit.create(UserService.class)).thenReturn(service);
 
         userRepository = new UserRepositoryDefault(retrofit);
+    }
+
+    @AfterEach
+    void tearDown() throws Exception {
+        if (closeable != null) {
+            closeable.close();
+        }
     }
 
     @Test

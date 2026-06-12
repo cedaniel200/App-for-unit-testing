@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FakePhraseDao implements PhraseDao {
 
-    private List<Phrase> db;
+    private final List<Phrase> db;
 
     public FakePhraseDao() {
         db = new ArrayList<>();

@@ -17,13 +17,12 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class ShellCommandsE2ETest {
+class ShellCommandsE2ETest {
 
     @Autowired
     private CalculatorCommands calculatorCommands;
@@ -43,11 +42,9 @@ public class ShellCommandsE2ETest {
     @Autowired
     private EmailDomain emailDomain;
 
-    private User mockUser;
-
     @BeforeEach
     void setUp() throws Exception {
-        mockUser = new User();
+        var mockUser = new User();
         mockUser.setId(1);
         mockUser.setName("Leanne Graham");
         mockUser.setUsername("Bret");
@@ -143,15 +140,17 @@ public class ShellCommandsE2ETest {
     @Test
     void listUsers_shouldReturnFormattedList() {
         String result = userCommands.list();
-        assertThat(result).contains("User{");
-        assertThat(result).contains("Leanne Graham");
+        assertThat(result)
+                .contains("User{")
+                .contains("Leanne Graham");
     }
 
     @Test
     void findById_shouldReturnUser() {
         String result = userCommands.findById(1);
-        assertThat(result).contains("User{");
-        assertThat(result).contains("Leanne Graham");
+        assertThat(result)
+                .contains("User{")
+                .contains("Leanne Graham");
     }
 
     @Test

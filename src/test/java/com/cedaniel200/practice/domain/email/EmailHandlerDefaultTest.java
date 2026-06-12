@@ -16,14 +16,13 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class EmailHandlerDefaultTest {
+class EmailHandlerDefaultTest {
 
     private EmailHandler emailHandler;
-    private JavaMailSender javaMailSender;
 
     @BeforeEach
     void setup(){
-        javaMailSender = new JavaMailSenderStub();
+        var javaMailSender = new JavaMailSenderStub();
         emailHandler = new EmailHandlerDefault(javaMailSender);
     }
 

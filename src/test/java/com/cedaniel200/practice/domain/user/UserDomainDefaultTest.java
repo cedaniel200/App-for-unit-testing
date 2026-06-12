@@ -4,6 +4,7 @@ import com.cedaniel200.practice.exception.MalformedDataException;
 import com.cedaniel200.practice.exception.ServiceNotAvailableException;
 import com.cedaniel200.practice.model.User;
 import com.cedaniel200.practice.repository.user.UserRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -16,16 +17,24 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 
-public class UserDomainDefaultTest {
+class UserDomainDefaultTest {
 
+    private AutoCloseable closeable;
     @Mock
     private UserRepository userRepository;
     private UserDomain userDomain;
 
     @BeforeEach
     void setup(){
-        MockitoAnnotations.openMocks(this);
+        closeable = MockitoAnnotations.openMocks(this);
         userDomain = new UserDomainDefault(userRepository);
+    }
+
+    @AfterEach
+    void tearDown() throws Exception {
+        if (closeable != null) {
+            closeable.close();
+        }
     }
 
     @Test

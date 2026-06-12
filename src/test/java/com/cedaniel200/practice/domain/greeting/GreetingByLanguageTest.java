@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GreetingByLanguageTest {
+class GreetingByLanguageTest {
 
     private static Stream<Arguments> greetings() {
         return Stream.of(

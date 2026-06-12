@@ -8,20 +8,16 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CalculatorDefaultTest {
+class CalculatorDefaultTest {
 
-    private Adder adder;
-    private Subtractor subtractor;
-    private Multiplier multiplier;
-    private Divider divider;
     private Calculator calculator;
 
     @BeforeEach
     void setup(){
-        adder = new AdderDefault();
-        subtractor = new SubtractorDefault();
-        multiplier = new MultiplierDefault();
-        divider = new DividerDefault();
+        var adder = new AdderDefault();
+        var subtractor = new SubtractorDefault();
+        var multiplier = new MultiplierDefault();
+        var divider = new DividerDefault();
         calculator = new CalculatorDefault(adder, subtractor, multiplier, divider);
     }
 
