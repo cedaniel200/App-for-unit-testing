@@ -74,4 +74,5 @@ When working on this project, load the relevant skill(s) BEFORE writing any code
 | Skill Name | Path | Description / When to Use |
 | :--- | :--- | :--- |
 | `readme-writer` | `.opencode/skills/readme-writer/SKILL.md` | Úsala cuando necesites crear o mejorar un README.md con documentación moderna de GitHub. Aplica estructura, formato GFM, badges y principios Diátaxis.
+| `git-commit` | ~/.agents/skills/git-commit/SKILL.md | Ejecuta git commit con análisis de mensajes de commit convencional, preparación inteligente y generación de mensajes. Úsalo cuando el usuario solicite confirmar cambios, crear un git commit o mencione "/commit".
 
