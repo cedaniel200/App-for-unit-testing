@@ -1,6 +1,5 @@
 package com.cedaniel200.practice.domain.greeting;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -22,7 +21,7 @@ public class GreetingByLanguageTest {
 
     @ParameterizedTest
     @MethodSource("greetings")
-    void mustBeSuccessfulIfReturnGreetingCorrectByLanguage(String language, String expected){
+    void getGreeting_shouldReturnCorrectMessageBasedOnLanguage(String language, String expected){
         String actual = GreetingByLanguage.getGreeting(language);
         assertEquals(expected, actual);
     }

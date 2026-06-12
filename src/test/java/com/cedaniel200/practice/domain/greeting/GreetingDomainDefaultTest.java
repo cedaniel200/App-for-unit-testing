@@ -17,7 +17,7 @@ public class GreetingDomainDefaultTest {
     }
 
     @Test
-    void mustBeSuccessfulIfReturnHola() {
+    void greetSpanish_shouldReturnLocalizedGreeting() {
         String expectedGreeting = "Hola";
         try (MockedStatic<GreetingByLanguage> greetingByLanguage = Mockito.mockStatic(GreetingByLanguage.class)) {
             greetingByLanguage.when(() -> GreetingByLanguage.getGreeting("es"))
@@ -30,7 +30,7 @@ public class GreetingDomainDefaultTest {
     }
 
     @Test
-    void mustBeSuccessfulIfReturnUnsupportedLanguage() {
+    void greet_unsupportedLang_shouldReturnDefaultMessage() {
         String expectedGreeting = "unsupported language";
         try (MockedStatic<GreetingByLanguage> greetingByLanguage = Mockito.mockStatic(GreetingByLanguage.class)) {
             greetingByLanguage.when(() -> GreetingByLanguage.getGreeting("it"))

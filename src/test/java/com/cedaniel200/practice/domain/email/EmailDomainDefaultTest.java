@@ -18,7 +18,7 @@ public class EmailDomainDefaultTest {
     }
 
     @Test
-    void mustBeSuccessfulIfEmailIsSend(){
+    void sendValid_email_shouldIncrementEmailsSentCounter(){
         Email email = new EmailDummy();
         emailDomain.sendMail(email);
         assertEquals(1, emailHandleStub.getAmountOfEmailsSent());
@@ -26,7 +26,7 @@ public class EmailDomainDefaultTest {
     }
 
     @Test
-    void mustBeSuccessfulIfEmailIsNotSend(){
+    void sendEmail_whenFails_shouldIncrementEmailsNotSentCounter(){
         emailDomain.sendMail(null);
         assertEquals(0, emailHandleStub.getAmountOfEmailsSent());
         assertEquals(1, emailHandleStub.getAmountOfEmailsNotSend());

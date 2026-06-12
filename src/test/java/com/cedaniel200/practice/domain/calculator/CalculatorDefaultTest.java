@@ -26,7 +26,7 @@ public class CalculatorDefaultTest {
     }
 
     @Test
-    void mustBeSuccessfulIfAddPositiveIntegerNumbers(){
+    void add_twoPositiveIntegers_shouldReturnExpectedSum(){
         // Arrange
         int expected = 10;
 
@@ -39,7 +39,7 @@ public class CalculatorDefaultTest {
 
     @ParameterizedTest
     @CsvSource({"1, 2, 3", "-10, 30, 20", "15, -5, 10", "-5, -10, -15"})
-    void mustBeSuccessfulIfAddIntegerNumbersWithParam(int firstNumber, int secondNumber, int expectedValue){
+    void add_twoIntegers_shouldReturnExpectedResult(int firstNumber, int secondNumber, int expectedValue){
         // Act
         int actual = calculator.add(firstNumber, secondNumber);
 
@@ -48,7 +48,7 @@ public class CalculatorDefaultTest {
     }
 
     @Test
-    void mustBeSuccessfulIfAddNegativeIntegerNumbers(){
+    void add_twoNegativeIntegers_shouldReturnExpectedResult(){
         // Arrange
         int expected = -6;
 
@@ -60,7 +60,7 @@ public class CalculatorDefaultTest {
     }
 
     @Test
-    void mustBeSuccessfulIfSubtractPositiveIntegerNumbers(){
+    void subtract_twoIntegers_shouldReturnExpectedDifference(){
         // Arrange
         int expected = -6;
 
@@ -72,7 +72,7 @@ public class CalculatorDefaultTest {
     }
 
     @Test
-    void mustBeSuccessfulIfSubtractNegativeIntegerNumbers(){
+    void subtract_negativeIntegers_shouldReturnExpectedDifference(){
         // Arrange
         int expected = 0;
 
@@ -84,7 +84,7 @@ public class CalculatorDefaultTest {
     }
 
     @Test
-    void mustBeSuccessfulIfMultiplyPositiveIntegerNumbers(){
+    void multiply_twoIntegers_shouldReturnProduct(){
         // Arrange
         int expected = 15;
 
@@ -96,7 +96,7 @@ public class CalculatorDefaultTest {
     }
 
     @Test
-    void mustBeSuccessfulIfMultiplyNegativeIntegerNumbers(){
+    void multiply_negativeIntegers_shouldReturnProduct(){
         // Arrange
         int expected = 9;
 
@@ -108,7 +108,7 @@ public class CalculatorDefaultTest {
     }
 
     @Test
-    void mustBeSuccessfulIfMultiplyByZero(){
+    void multiply_anyNumberWithZero_shouldReturnZero(){
         // Arrange
         int expected = 0;
 
@@ -120,7 +120,7 @@ public class CalculatorDefaultTest {
     }
 
     @Test
-    void mustBeSuccessfulIfDividePositiveIntegerNumbers(){
+    void divide_twoIntegers_shouldReturnQuotient(){
         // Arrange
         int expected = 3;
 
@@ -132,7 +132,7 @@ public class CalculatorDefaultTest {
     }
 
     @Test
-    void mustBeSuccessfulIfDivideNegativeIntegerNumbers(){
+    void divide_negativeIntegers_shouldReturnCorrectResult(){
         // Arrange
         int expected = 3;
 
@@ -144,7 +144,7 @@ public class CalculatorDefaultTest {
     }
 
     @Test
-    void mustBeSuccessfulIfThrowAnException(){
+    void divide_integerByZero_shouldThrowArithmeticException(){
         // Primera forma de validar si se lanza una excepción
         assertThrows(ArithmeticException.class, () -> calculator.divide(8, 0));
     }
