@@ -28,14 +28,14 @@ public class EmailHandlerDefaultTest {
     }
 
     @Test
-    void mustBeSuccessfulIfEmailIsSend(){
+    void send_validEmail_shouldIncrementEmailCounter(){
         Email email = new EmailData("email@email.com", "hi", "Hello");
         emailHandler.send(email);
         assertEquals(1, emailHandler.getAmountOfEmailsSent());
     }
 
     @Test
-    void mustBeSuccessfulIfEmailIsNotSend(){
+    void send_whenFails_shouldIncrementEmailsNotSentCounter(){
         emailHandler.send(null);
         assertEquals(1, emailHandler.getAmountOfEmailsNotSend());
     }

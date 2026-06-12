@@ -59,28 +59,28 @@ public class UserRepositoryDefaultTest {
     }
 
     @Test
-    void mustBeSuccessfulIfReturnAnUserList() throws ServiceNotAvailableException {
+    void list_users_shouldReturnExpectedUsers() throws ServiceNotAvailableException {
         List<User> actualUsers = userRepository.list();
 
         assertEquals(expectedUsers, actualUsers);
     }
 
     @Test
-    void mustBeSuccessfulIfListMethodThrowServiceNotAvailableException() throws IOException {
+    void list_users_whenNetworkFailureOccurs_shouldThrowServiceNotAvailableException() throws IOException {
         Mockito.when(listCall.execute()).thenThrow(new IOException());
 
         assertThrows(ServiceNotAvailableException.class, () -> userRepository.list());
     }
 
     @Test
-    void mustBeSuccessfulIfReturnAnUser() throws ServiceNotAvailableException {
+    void findById_shouldReturnUserByIdOne() throws ServiceNotAvailableException {
         User actualUser = userRepository.findById(1);
 
         assertEquals(expectedUser.getId(), actualUser.getId());
     }
 
     @Test
-    void mustBeSuccessfulIfFindByIdMethodThrowServiceNotAvailableException() throws IOException {
+    void findById_whenNetworkFailureOccurs_shouldThrowServiceNotAvailableException() throws IOException {
         Mockito.when(userCall.execute()).thenThrow(new IOException());
 
         assertThrows(ServiceNotAvailableException.class, () -> userRepository.findById(1));

@@ -29,7 +29,7 @@ public class UserDomainDefaultTest {
     }
 
     @Test
-    void mustBeSuccessfulIfReturnUserList() throws ServiceNotAvailableException, MalformedDataException {
+    void list_users_shouldReturnList() throws ServiceNotAvailableException, MalformedDataException {
         List<User> expectedUsers = new ArrayList<>();
         expectedUsers.add(new User());
         expectedUsers.add(new User());
@@ -43,20 +43,20 @@ public class UserDomainDefaultTest {
 
     // Segunda forma de validar si se lanza una excepción
     @Test
-    void mustBeSuccessfulIfListMethodThrowAnMalformedDataException() throws ServiceNotAvailableException {
+    void list_users_whenIsNull_shouldThrowMalformedDataException() throws ServiceNotAvailableException {
         Mockito.when(userRepository.list()).thenReturn(null);
         assertThrows(MalformedDataException.class, () -> userDomain.list());
     }
 
     // Segunda forma de validar si se lanza una excepción
     @Test
-    void mustBeSuccessfulIfListMethodThrowAnServiceNotAvailableException() throws ServiceNotAvailableException {
+    void list_users_whenExternalErrorOccurs_shouldThrowServiceNotAvailableException() throws ServiceNotAvailableException {
         Mockito.when(userRepository.list()).thenThrow(new ServiceNotAvailableException("", null));
         assertThrows(ServiceNotAvailableException.class, () -> userDomain.list());
     }
 
     @Test
-    void mustBeSuccessfulIfFindByIdMethodReturnAnUser() throws MalformedDataException, ServiceNotAvailableException {
+    void findById_shouldReturnUser() throws MalformedDataException, ServiceNotAvailableException {
         int id = 1;
         User expectedUser = new User();
         expectedUser.setId(id);
@@ -68,33 +68,33 @@ public class UserDomainDefaultTest {
     }
 
     @Test
-    void mustBeSuccessfulIfFindByIdMethodThrowAnServiceNotAvailableException() throws ServiceNotAvailableException {
+    void findById_whenExternalErrorOccurs_shouldThrowServiceNotAvailableException() throws ServiceNotAvailableException {
         Mockito.when(userRepository.findById(anyInt())).thenThrow(new ServiceNotAvailableException("", null));
         assertThrows(ServiceNotAvailableException.class, () -> userDomain.findById(1));
     }
 
     // Tercera forma para validar si se lanza una excepción
     @Test
-    void mustBeSuccessfulIfFindByIdMethodThrowAnMalformedDataExceptionWhenUserIsNull() throws ServiceNotAvailableException {
+    void findById_whenUserIsNull_shouldThrowMalformedDataException() throws ServiceNotAvailableException {
         Mockito.when(userRepository.findById(anyInt())).thenReturn(null);
         MalformedDataException exception = assertThrows(MalformedDataException.class, () -> userDomain.findById(1));
         assertEquals("the user has malformed data", exception.getMessage());
     }
 
     @Test
-    void mustBeSuccessfulIfFindByIdMethodThrowAnMalformedDataExceptionWhenIdIsNegative() {
+    void findById_whenIdIsNegative_shouldThrowMalformedDataException() {
         MalformedDataException exception = assertThrows(MalformedDataException.class, () -> userDomain.findById(-1));
         assertEquals("The parameter is malformed: The id can't be less than zero", exception.getMessage());
     }
 
     @Test
-    void mustBeSuccessfulIfFindByIdMethodThrowAnMalformedDataExceptionWhenIdIsZero() {
+    void findById_whenIdIsZero_shouldThrowMalformedDataException() {
         MalformedDataException exception = assertThrows(MalformedDataException.class, () -> userDomain.findById(0));
         assertEquals("The parameter is malformed: The id should be greater than zero", exception.getMessage());
     }
 
     @Test
-    void mustBeSuccessfulIfFindByIdMethodThrowAnMalformedDataExceptionWhenIdGreaterThanTen() {
+    void findById_whenIdGreaterThanTen_shouldThrowMalformedDataException() {
         MalformedDataException exception = assertThrows(MalformedDataException.class, () -> userDomain.findById(11));
         assertEquals("The parameter is malformed: There is no id greater than ten", exception.getMessage());
     }
